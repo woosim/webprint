@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" content=text/html;charset=UTF-8 meta http-equiv="Content-Type"/>
+<html>
+    <head>
+        <script type="text/javascript" charset="utf-8" src='./js/jquery-1.11.1.min.js'></script>
+        <script type="text/javascript" charset="utf-8" src='./js/WSEncoder-1.0.0.min.js'></script>
+        <script type="text/javascript" charset="utf-8" src='./js/WSComm-1.0.0.min.js'></script>
+        <style type="text/css"> @import url("./css/style.css");</style>
+    </head>
+   
+    <body>
+        <p align="center">
+            <button id="print_data" class="buttons">PRINT</button>
+        </p>
+        <br/>
+        <p align="center" id="result">
+        </p>
+        <script type="text/javascript" charset="utf-8">
+
+        var finishedCallback = function(result){
+            console.log(result);
+            document.getElementById("result").innerHTML = result;
+        };
+
+        var errorCallback = function(result){
+            console.log(result);
+        };
+
+        function print_sample(){
+            var comm = new WSComm();
+            var encoder = new WSEncoder();
+
+            var printableXml = encoder.addPrintMode("page");
+
+            //1 inch:192 , 2 inch:384, 3 inch:576, 4 inch:768
+            printableXml+= encoder.addPrintingArea({x:0, y:0, width:384, height:800});
+            printableXml+= encoder.addText({underline:1, width:1, height:1, data:"Woosim Cafe"}), printableXml+= encoder.addNewLine();
+            printableXml+= encoder.addText({underline:1, width:0, height:0, data:"Coffee, tea and bread"}), printableXml+= encoder.addNewLine();
+            printableXml+= encoder.addFeedNDot(15);
+            printableXml+= encoder.addFontSize(1);
+            printableXml+= encoder.addPosition({x:277, y:105});
+            printableXml+= encoder.addText({data:"2015-01-27"}), printableXml+= encoder.addNewLine();
+            printableXml+= encoder.addFontSize(0);
+            printableXml+= encoder.addPosition({x:290, y:5});
+            printableXml+= encoder.addQrCode({version:0, level:'H', size:2, data:"www.woosim.com/english"});
+            printableXml+= encoder.addBox({x:0, y:130, width:384, height:0, thickness:2});
+            printableXml+= encoder.addFeedNDot(5);
+            printableXml+= encoder.addText({data:"#      Item      Num    Charge"}), printableXml+= encoder.addNewLine();
+            printableXml+= encoder.addText({data:"#      Latte      1     $ 3.35"}), printableXml+= encoder.addNewLine();
+            printableXml+= encoder.addText({data:"#   House Coffee  2     $ 3.98"}), printableXml+= encoder.addNewLine();
+            printableXml+= encoder.addText({data:"#      Tea        3     $ 1.95"}), printableXml+= encoder.addFeedNDot(5);
+            printableXml+= encoder.addBox({x:0, y:270, width:384, height:0, thickness:2});
+            printableXml+= encoder.addBox({x:0, y:310, width:115, height:0, thickness:2}), printableXml+= encoder.addBox({x:260, y:310, width:124, height:0, thickness:2}), printableXml+= encoder.addFeedNDot(15);
+            printableXml+= encoder.addPosition({x:123, y:300});
+            printableXml+= encoder.addText({data:"Credit Card"}), printableXml+= encoder.addNewLine();
+
+            printableXml+= encoder.addText({data:"Number:         "});
+            printableXml+= encoder.addFontSize(1);
+            printableXml+= encoder.addText({data:"6688-9988-6644-3311"}), printableXml+= encoder.addNewLine();
+            printableXml+= encoder.addFontSize(0);
+            printableXml+= encoder.addText({data:"Payment"}), printableXml+= encoder.addNewLine();
+            printableXml+= encoder.addText({data:"Price:                  $ 9.28"}), printableXml+= encoder.addNewLine();
+            printableXml+= encoder.addText({data:"Tax:                    $ 0.22"}), printableXml+= encoder.addNewLine();
+            printableXml+= encoder.addBox({x:0, y:490, width:384, height:0, thickness:2}), printableXml+= encoder.addFeedNLine(15);
+            printableXml+= encoder.addText({data:"Total:                  $ 9.50"}), printableXml+= encoder.addNewLine();
+            printableXml+= encoder.addText({data:"Credit Card:            $ 9.50"}), printableXml+= encoder.addNewLine();
+
+            printableXml+= encoder.addPosition({x:40, y:580});
+            printableXml+= encoder.addBarcode({type:'code128', width:2, height:50, hri:true, data:"20150127123456789"});
+            printableXml+= encoder.addFeedNLine(2);
+
+            printableXml+= encoder.addPrintMode("standard");
+            printableXml+= encoder.addCutting(0);
+
+            comm.send(printableXml, finishedCallback, errorCallback);    
+        };
+
+        $('#print_data').on('click', print_sample);
+        
+    
+        </script>
+    </body>
+</html>

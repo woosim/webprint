@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" content=text/html;charset=UTF-8 meta http-equiv="Content-Type"/>
+<html>
+    <head>
+    <script type="text/javascript" charset="utf-8" src='./js/jquery-1.11.1.min.js'></script>
+    <script type="text/javascript" charset="utf-8" src='./js/WSEncoder-1.0.0.min.js'></script>
+    <script type="text/javascript" charset="utf-8" src='./js/WSComm-1.0.0.min.js'></script>
+    
+    <script type="text/javascript">
+    </script>
+    <style type="text/css"> @import url("./css/style.css");</style>
+    </head>
+    
+    <body>
+        <canvas align=center id='canvas' dir="rtl" width='384'  height='900'>Canvas not supported</canvas>
+        <img id="barcode" style="display: none;"/>
+        <script type="text/javascript" charset="utf-8" src='./js/JsBarcode.all.min.js'></script>
+        
+    <p align="center">
+        <button id="print_data" class="buttons">PRINT</button>
+    </p>    
+
+
+    <script type="text/javascript" charset="utf-8">
+
+        var startY = 10;
+        var startX = 5;
+        var offset = 20;
+        var linespace = 30;
+        var defaultFont = "20px HelveticaNeue-Thin";
+        
+        var canvas = document.getElementById('canvas'),
+            context = canvas.getContext('2d');
+
+        function drawText(a){
+            a.font != void 0 ? context.font = a.font : context.font = defaultFont;
+            
+            var posX = startX;
+            var posY = startY;
+
+            if(a.align == "center"){
+                context.textAlign = "center";
+                posX = canvas.width/2;
+            }else if(a.align == "right"){
+                posX = canvas.width - startX;
+                context.textAlign = "right";
+            }else{
+                context.textAlign = "left";
+            }
+
+            context.fillText(a.string, posX, posY);
+        }
+        
+        var logo = new Image();
+        logo.src = './img/woosim.bmp';
+        logo.onload = function() {
+            context.drawImage(logo, (canvas.width - logo.width)/2, startY, logo.width, logo.height), startY+= logo.height + 30;
+
+            drawText({string:"Sales Receipt",font:"30px Arial black" , align:"center"}), startY+= 60;
+            drawText({string:"MERCHANT NAME"}),  drawText({string:"WOOSIM Coffee", align:"right"}), startY+= linespace;
+            drawText({string:"MASTER"}),         drawText({string:"Gil-dong Hong", align:"right"}), startY+= linespace;
+            drawText({string:"ADDRESS"}),        drawText({string:"#60, Sandan-ro 388", align:"right"}), startY+= linespace;
+            drawText({string:"beon-gil, Hongseong-gun", align:"right"}), startY+= linespace;
+            drawText({string:"Chungnam Rep. of Korea", align:"right"}), startY+= linespace;
+            drawText({string:"-----------------------------------------------------------------------",align:"center"}), startY+= linespace;
+            drawText({string:"ITEM"}),           drawText({string:"QTY", align:"center"}),  drawText({string:"PRICE", align:"right"}), startY+= linespace;
+            drawText({string:"Cafe Mocha"}),     drawText({string:"1", align:"center"}),    drawText({string:"4.0 $", align:"right"}), startY+= linespace;
+            drawText({string:"Capucino"}),       drawText({string:"1", align:"center"}),    drawText({string:"4.5 $", align:"right"}), startY+= linespace;
+            drawText({string:"Espresso"}),       drawText({string:"1", align:"center"}),    drawText({string:"4.0 $", align:"right"}), startY+= linespace;
+            drawText({string:"Lungo"}),          drawText({string:"1", align:"center"}),    drawText({string:"4.0 $", align:"right"}), startY+= linespace;
+            drawText({string:"Vienna Coffee"}),  drawText({string:"1", align:"center"}),    drawText({string:"4.0 $", align:"right"}), startY+= linespace;
+            drawText({string:"Vanilla Latte"}),  drawText({string:"1", align:"center"}),    drawText({string:"4.0 $", align:"right"}), startY+= linespace;
+            drawText({string:"Macchiato"}),      drawText({string:"1", align:"center"}),    drawText({string:"4.0 $", align:"right"}), startY+= linespace;
+            drawText({string:"Drip Coffee"}),    drawText({string:"1", align:"center"}),    drawText({string:"4.0 $", align:"right"}), startY+= linespace;
+            drawText({string:"----------------------------------------------------------------------",align:"center"}), startY+= linespace;
+            drawText({string:"Total"}),          drawText({string:"32.5$", align:"right"}), startY+= linespace;
+            drawText({string:"WOOSIM Card"}),startY+= linespace;
+            drawText({string:"1340 0431 **** ****"}),startY+= linespace;
+
+
+            var barcodeWidth = 300;
+            var barcodeHeight = 100;
+            var image = document.getElementById('barcode');
+            JsBarcode("#barcode","9780199532179", {format:"EAN13", fontSize:10, width:barcodeWidth, height:barcodeHeight});
+
+            image.onload = function() {
+            context.drawImage(image, (canvas.width - barcodeWidth) /2, startY, barcodeWidth, barcodeHeight);
+            }
+        }
+    
+        function print_sample(){
+    
+            var comm = new WSComm();
+            var encoder = new WSEncoder();
+
+            var printableXml = encoder.addCanvas({ctx: context, x: 0, y:0, width:384, height:900, dithering:false});
+            comm.send(printableXml, finishedCallback, errorCallback);    
+        };
+
+        var finishedCallback = function(result){
+            console.log(result);
+        };
+ 
+        var errorCallback = function(result){
+            console.log(result);
+        };
+
+        $('#print_data').on('click', print_sample);
+    
+    </script>
+</body>

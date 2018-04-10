@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" content=text/html;charset=UTF-8 meta http-equiv="Content-Type"/>
+<html>
+    <head>
+    <script type="text/javascript" charset="utf-8" src='./js/jquery-1.11.1.min.js'></script>
+    <script type="text/javascript" charset="utf-8" src='./js/WSEncoder-1.0.0.min.js'></script>
+    <script type="text/javascript" charset="utf-8" src='./js/WSComm-1.0.0.min.js'></script>
+    <style type="text/css"> @import url("./css/style.css");</style>
+    </head>
+    <body>
+        <p align="center">this web page should be shown on safari</p>
+        <p align="center">
+                <button id="print_data" class="buttons">PRINT</button>
+        </p>
+        <script type="text/javascript" charset="utf-8">
+        $("#print_data").click(function(){
+            var currentURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            var openURL = "http://10.10.50.52/canvas.html"
+            var newURL = "wsbrowser://?openURL="+openURL+"&returnURL="+currentURL;
+            window.location.href=newURL;
+        });
+        </script>
+    </body>
+</html>
