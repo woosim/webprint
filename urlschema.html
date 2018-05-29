@@ -18,7 +18,7 @@
             if (userAgent.search("android") > -1){
                 var currentURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
                 var openURL = "https://woosim.github.io/webprint/canvas.html"
-                var newURL = "Intent://wswebprint?openURL="+openURL+"&returnURL="+currentURL;
+                var newURL = "wswebprint://woosim?openURL="+openURL+"&returnURL="+currentURL;
                 window.location.href=newURL;
             }
             else if ((userAgent.search("iphone") > -1) || (userAgent.search("ipod") > -1) || (userAgent.search("ipad") > -1)){
