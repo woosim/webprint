@@ -43,7 +43,7 @@
             printableXml+= encoder.setFontSize(0);
             printableXml+= encoder.pm_setPosition({x:290, y:5});
             printableXml+= encoder.addQrCode({version:0, level:'H', size:2, data:"www.woosim.com/english"});
-            printableXml+= encoder.addBox({x:0, y:130, width:384, height:0, thickness:2});
+            printableXml+= encoder.pm_addBox({x:0, y:130, width:384, height:0, thickness:2});
             printableXml+= encoder.addFeedNDot(5);
             printableXml+= encoder.addText({data:"#      Item      Num    Charge"}), printableXml+= encoder.addNewLine();
             printableXml+= encoder.addText({data:"#      Latte      1     $ 3.35"}), printableXml+= encoder.addNewLine();
