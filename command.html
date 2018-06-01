@@ -34,7 +34,7 @@
 
             //1 inch:192 , 2 inch:384, 3 inch:576, 4 inch:768
             printableXml+= encoder.pm_setPrintingArea({x:0, y:0, width:384, height:800});
-            printableXml+= encoder.addText({underline:1, width:1, height:1, data:"Woosim Cafe"}), printableXml+= encoder.addNewLine();
+            printableXml+= encoder.addText({underline:1, width:2, height:2, data:"Woosim Cafe"}), printableXml+= encoder.addNewLine();
             printableXml+= encoder.addText({underline:1, width:1, height:1, data:"Coffee, tea and bread"}), printableXml+= encoder.addNewLine();
             printableXml+= encoder.addFeedNDot(15);
             printableXml+= encoder.setFontSize(1);
