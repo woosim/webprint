@@ -68,7 +68,8 @@
             printableXml+= encoder.pm_setPosition({x:40, y:580});
             printableXml+= encoder.addBarcode({type:'code128', width:2, height:50, hri:true, data:"20150127123456789"});
             printableXml+= encoder.addFeedNLine(2);
-            printableXml+= encoder.setCutting(0)
+            printableXml+= encoder.setCutting(0);
+            printableXml+= encoder.printData("page");
 
             comm.send(printableXml);    
         };
