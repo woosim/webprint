@@ -49,8 +49,8 @@
             printableXml+= encoder.addText({data:"#      Latte      1     $ 3.35"}), printableXml+= encoder.addNewLine();
             printableXml+= encoder.addText({data:"#   House Coffee  2     $ 3.98"}), printableXml+= encoder.addNewLine();
             printableXml+= encoder.addText({data:"#      Tea        3     $ 1.95"}), printableXml+= encoder.addFeedNDot(5);
-            printableXml+= encoder.addBox({x:0, y:270, width:384, height:0, thickness:2});
-            printableXml+= encoder.addBox({x:0, y:310, width:115, height:0, thickness:2}), printableXml+= encoder.addBox({x:260, y:310, width:124, height:0, thickness:2}), printableXml+= encoder.addFeedNDot(15);
+            printableXml+= encoder.pm_addBox({x:0, y:270, width:384, height:0, thickness:2});
+            printableXml+= encoder.pm_addBox({x:0, y:310, width:115, height:0, thickness:2}), printableXml+= encoder.addBox({x:260, y:310, width:124, height:0, thickness:2}), printableXml+= encoder.addFeedNDot(15);
             printableXml+= encoder.pm_setPosition({x:123, y:300});
             printableXml+= encoder.addText({data:"Credit Card"}), printableXml+= encoder.addNewLine();
 
@@ -61,7 +61,7 @@
             printableXml+= encoder.addText({data:"Payment"}), printableXml+= encoder.addNewLine();
             printableXml+= encoder.addText({data:"Price:                  $ 9.28"}), printableXml+= encoder.addNewLine();
             printableXml+= encoder.addText({data:"Tax:                    $ 0.22"}), printableXml+= encoder.addNewLine();
-            printableXml+= encoder.addBox({x:0, y:490, width:384, height:0, thickness:2}), printableXml+= encoder.addFeedNLine(15);
+            printableXml+= encoder.pm_addBox({x:0, y:490, width:384, height:0, thickness:2}), printableXml+= encoder.addFeedNLine(15);
             printableXml+= encoder.addText({data:"Total:                  $ 9.50"}), printableXml+= encoder.addNewLine();
             printableXml+= encoder.addText({data:"Credit Card:            $ 9.50"}), printableXml+= encoder.addNewLine();
 
