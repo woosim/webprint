@@ -94,7 +94,7 @@
             var encoder = new WSEncoder();
 
             var printableXml = encoder.addCanvas({ctx: context, x: 0, y:0, width:384, height:900, dithering:false});
-            comm.send(printableXml, finishedCallback, errorCallback);    
+            comm.send(printableXml);    
         };
 
         var finishedCallback = function(result){
