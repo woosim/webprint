@@ -19,7 +19,7 @@
 
         var finishedCallback = function(result){
             console.log(result);
-            document.getElementById("result").innerHTML = result;
+            document.getElementById("result").innerHTML = JSON.stringify(result);
         };
 
         var errorCallback = function(result){
