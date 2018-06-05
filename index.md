@@ -11,6 +11,6 @@
 
 ### URL Scheme
 
-> 외부 브라우저에서 WSWebBrowser를 호출해 영수증을 출력 합니다. [[sample]](https://woosim.github.io/webprint/urlscheme.html)
+> 외부 브라우저에서 WSWebBrowser를 호출합니다. [[sample]](https://woosim.github.io/webprint/urlscheme.html)
 
 
