@@ -3,7 +3,7 @@
 
 ### Print image(canves) receipt
 
-Canvas를 사용한 receipt를 출력하는 . [[Demo]](https://woosim.github.io/webprint/canvas.html)
+Canvas를 사용한 receipt를 출력하는 샘플입니다. [[Demo]](https://woosim.github.io/webprint/canvas.html)
 
 ### Print text receipt
 
