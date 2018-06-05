@@ -11,6 +11,6 @@ Canvas를 사용한 receipt를 출력하는 샘플입니다. [[Demo]](https://wo
 
 ### URL Scheme
 
-외부 브라우저에서 WSWebBrowser를 호출해 출력 할수 있습니다. [[Demo]](https://woosim.io/webprint/urlscheme)
+외부 브라우저에서 WSWebBrowser를 호출해 영수증을 출력 합니다. [[Demo]](https://woosim.io/webprint/urlscheme)
 
 
