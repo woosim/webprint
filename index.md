@@ -7,7 +7,7 @@
 
 ### Print text receipt
 
-> Sample that print receipt composed of text with printer command [[sample]](https://woosim.github.io/webprint/command.html)
+> Sample that print receipt was composed of text with printer command [[sample]](https://woosim.github.io/webprint/command.html)
 
 ### URL Scheme
 
