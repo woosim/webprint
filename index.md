@@ -3,7 +3,7 @@
 
 ### Print image(canves) receipt
 
-> Sample that prints receipt for canvas. [[sample]](https://woosim.github.io/webprint/canvas.html)
+> Sample that print receipt for canvas. [[sample]](https://woosim.github.io/webprint/canvas.html)
 
 ### Print text receipt
 
