@@ -3,14 +3,14 @@
 
 ### Print image(canves) receipt
 
-> Canvas를 사용한 receipt를 출력하는 샘플입니다. [[sample]](https://woosim.github.io/webprint/canvas.html)
+> Sample that prints receipt for canvas. [[sample]](https://woosim.github.io/webprint/canvas.html)
 
 ### Print text receipt
 
-> 프린터 명령어를 이용해 Text로 구성한 receipt를 출력하는 샘플입니다. [[sample]](https://woosim.github.io/webprint/command.html)
+> Sample that print receipt composed of text with printer command [[sample]](https://woosim.github.io/webprint/command.html)
 
 ### URL Scheme
 
-> 외부 브라우저에서 WSWebBrowser를 호출합니다. [[sample]](https://woosim.github.io/webprint/urlscheme.html)
+> Sample that open WSWebPrint from other browser. [[sample]](https://woosim.github.io/webprint/urlscheme.html)
 
 
