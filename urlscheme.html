@@ -21,7 +21,7 @@
             if (userAgent.search("android") > -1){
                 var currentURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
                 var openURL = "https://woosim.github.io/webprint/canvas.html"
-                var newURL = "intent://woosim?openURL="+openURL+"&returnURL="+currentURL + "/#Intent;scheme=wswebprint;package=com.woosim.wswebprint;end";
+                var newURL = "intent://woosim?openURL="+openURL+"&returnURL="+currentURL + "/#Intent;scheme=wsweb;package=com.woosim.wswebprint;end";
 
                 window.location.href=newURL;
             }
