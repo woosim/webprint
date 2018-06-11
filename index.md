@@ -7,7 +7,7 @@
 
 ### Print text receipt
 
-> It is a sample that prints a receipt build with text. [[sample]](https://woosim.github.io/webprint/command.html)
+> It is a sample that prints a receipt created with text. [[sample]](https://woosim.github.io/webprint/command.html)
 
 ### URL Scheme
 
