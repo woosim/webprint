@@ -14,3 +14,8 @@
 > It is a sample that open WSWebPrint from other browser. [[sample]](https://woosim.github.io/webprint/urlscheme.html)
 
 
+### Test 
+
+> [[go test]] (https://woosim.github.io/webprint/test.html
+
+
