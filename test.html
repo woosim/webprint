@@ -34,7 +34,7 @@
             var printableXml = encoder.initPrinterStatus();
             printableXml+= encoder.setPrintMode("standard");
             //1 inch:192 , 2 inch:384, 3 inch:576, 4 inch:768
-            printableXml+= encoder.setCodeTable("euc_kr");
+            printableXml+= encoder.setCodeTable("euc-kr");
             printableXml+= encoder.addText({underline:1, width:2, height:2, data:"우심카페"}), printableXml+= encoder.addNewLine();
             printableXml+= encoder.addText({underline:1, width:1, height:1, data:"Coffee, tea and bread"}), printableXml+= encoder.addNewLine();
             printableXml+= encoder.addFeedNDot(15);
