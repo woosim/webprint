@@ -3,14 +3,14 @@
 
 ### Print image(canves) receipt
 
-> Sample that print receipt for canvas. [[sample]](https://woosim.github.io/webprint/canvas.html)
+> It is a sample that prints the canvas object. [sample]](https://woosim.github.io/webprint/canvas.html)
 
 ### Print text receipt
 
-> Sample that print receipt was composed of text with printer command [[sample]](https://woosim.github.io/webprint/command.html)
+> It is a sample that prints a receipt build with text. [[sample]](https://woosim.github.io/webprint/command.html)
 
 ### URL Scheme
 
-> Sample that open WSWebPrint from other browser. [[sample]](https://woosim.github.io/webprint/urlscheme.html)
+> It is a sample that open WSWebPrint from other browser. [[sample]](https://woosim.github.io/webprint/urlscheme.html)
 
 
