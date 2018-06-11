@@ -16,6 +16,6 @@
 
 ### Test 
 
-> [[go test]] (https://woosim.github.io/webprint/test.html
+> [[go test]] (https://woosim.github.io/webprint/test.html)
 
 
