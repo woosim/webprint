@@ -23,12 +23,20 @@
 
         var finishedCallback = function(result){
             var code = result['ERR_CODE'];
-            if(code == 0){
-                alert("success");
-            }else if(code == 1){
-                alert("printer is not connected.");
-            }else if(code == 4){
-                alert("session is not opened.");
+            
+            switch(code)
+            {
+                case 0: 
+                    alert("success");
+                    break;
+                case 1: 
+                    alert("printer is not connected.");
+                    break;
+                case 4: 
+                    alert("session is not opened.");
+                    break;
+                default:
+                    break;
             }
         };
 
