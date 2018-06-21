@@ -22,9 +22,12 @@
         <script type="text/javascript" charset="utf-8">
 
         var finishedCallback = function(result){
-            console.log(result);
-            //document.getElementById("result").innerHTML = JSON.stringify(result);
-            alert(result['ERR_CODE']);
+            var code = result['ERR_CODE'];
+            if(code == 0){
+                alert("success");
+            }else if(code == 1){
+                alert("printer is not connected.");
+            }
         };
 
         function print_sample(){
