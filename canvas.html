@@ -101,7 +101,12 @@
         };
 
         var finishedCallback = function(result){
-            alert(result['ERR_CODE']);
+            var code = result['ERR_CODE'];
+            if(code == 0){
+                alert("success");
+            }else if(code == 1){
+                alert("printer is not connected.");
+            }
         };
 
         $('#print_data').on('click', print_sample);
