@@ -1,2 +1,2 @@
-### woosim javascript sdk v1.0.0
+### woosim javascript library v1.0.0
 
