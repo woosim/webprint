@@ -25,7 +25,7 @@
 
                 window.location.href=newURL;
             }
-            else if ((userAgent.search("iphone") > -1) || (userAgent.search("ipod") > -1) || (userAgent.search("ipad") > -1)){
+            else if ((userAgent.search("applewebkit") > -1)){
                 var currentURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
                 var openURL = "https://woosim.github.io/webprint/canvas.html"
                 var newURL = "wsweb://?openURL="+openURL+"&returnURL="+currentURL;
