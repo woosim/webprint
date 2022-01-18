@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" content=text/html;charset=UTF-8 meta http-equiv="Content-Type"/>
+
+<style>
+    body,head{color:#666;font:14px "Roboto", sans-serif;-webkit-font-smoothing:antialiased;background-color:#eee}
+</style>
+<html>
+    <head>
+        <script type="text/javascript" charset="utf-8" src='../js/jquery-1.11.1.min.js'></script>
+        <script type="text/javascript" charset="utf-8" src='../js/WSEncoder-1.0.0.min.js'></script>
+        <script type="text/javascript" charset="utf-8" src='../js/WSComm-1.0.0.min.js'></script>
+        <style type="text/css"> @import url("../css/style.css");</style>
+    </head>
+   
+    <body>
+        <p align="center">
+            <button id="connect_test" class="buttons">CONNECT</button>
+        </p>
+        <br/>
+        <p align="center" id="result">
+        </p>
+        <script type="text/javascript" charset="utf-8">
+
+        var finishedCallback = function(result){
+            var code = result['ERR_CODE'];
+            
+            switch(code)
+            {
+                case "0": 
+                    alert("Success");
+                    break;
+                case "1": 
+                    alert("Printer is not connected.");
+                    break;
+                case "4": 
+                    alert("Session is not opened.");
+                    break;
+                default:
+                    break;
+            }
+        };
+
+        
+
+        $('#connect_test').on('click', print_sample);
+        
+    
+        </script>
+    </body>
+</html>
