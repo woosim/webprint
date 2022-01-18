@@ -7,22 +7,17 @@
   const CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
   
   class BluetoothTest {
-    constructor {
+  
+    constructor() {
       this.device = null;
       this.server = null;
     }
-    request() {
-      let options = {filters:[{sercivess:[ PRINTER_SERVICE ]}]};
-      return navigator.bluetooth.requestDevice(options)
+    connect() {
+      return navigator.Bluetooth.requestDevice({filters:[{services:[ PRINTER_SERVICE ]}]})
       .then(device => {
         this.device = device;
+        return device.gatt.connect();
       })
     }
-  connect() {
-    if (!this.device) {
-      return Promise.reject("Device is not connec.");
-    }
-    return this.device.gatt.connect()
-  }
   
 })();
