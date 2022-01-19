@@ -73,11 +73,14 @@
             .then(server => server.getPrimaryService("a9fe5e12-de71-4020-b2cf-8bf764fb0a8d"))
             .then(service => service.getCharacteristic("a9fe5e12-de71-4020-b2cf-8bf764fb0a8d"))
             .then(characteristic => {
+                target.innerText = 'characteristic';
                 printCharacteristic = characteristic;
                 sendTextData();
             })
-            .catch(error => { alert("error"); });
-            
+            .catch(error => { 
+                target.innerText = 'error';
+                alert("error");
+            });
         });
             
         </script>
