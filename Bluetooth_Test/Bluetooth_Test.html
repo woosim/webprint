@@ -92,16 +92,17 @@
         };
             
         var connect = document.querySelector('#connect_test');
+        var printCharacteristic = null;
             
         connect.addEventListener('click', function() {
             navigator.bluetooth.requestDevice({
-                acceptAllDevices: true,
-                //filters: [{
-                //    services: [ 'a9fe5e12-de71-4020-b2cf-8bf764fb0a8d' ]
-                //}]
+                //acceptAllDevices: true,
+                filters: [{
+                    services: [ 'a9fe5e12-de71-4020-b2cf-8bf764fb0a8d' ]
+                }]
             })
             .then(device => {
-                print_sample();
+                alert("Success");
                 console.log('> Found ' + device.name);
                 console.log('Connecting to GATT Server...');
                 return device.gatt.connect();
