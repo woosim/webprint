@@ -101,11 +101,11 @@
                 //}]
             })
             .then(device => {
-                print_sample();
                 console.log('> Found ' + device.name);
                 console.log('Connecting to GATT Server...');
                 return device.gatt.connect();
             })
+            .then( print_sample(); )
             .catch(error => { console.error(error); });
             
         });
