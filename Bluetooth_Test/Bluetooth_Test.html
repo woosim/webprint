@@ -20,7 +20,7 @@
         <p align="center" id="result">
         </p>
         
-        <br/><br/><br/><br/><p id="target">start</p>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><p id="target">start</p>
         
         <script type="text/javascript" charset="utf-8">
 
@@ -66,13 +66,17 @@
                 //}]
             })
             .then(device => {
-                target.innerText = 'serching device...';
-                console.log('> Found ' + device.name);
-                console.log('Connecting to GATT Server...');
+                target.innerText = 'scan device...';
                 return device.gatt.connect();
             })
-            .then(server => server.getPrimaryService("a9fe5e12-de71-4020-b2cf-8bf764fb0a8d"))
-            .then(service => service.getCharacteristic("a9fe5e12-de71-4020-b2cf-8bf764fb0a8d"))
+            .then(server => {
+                server.getPrimaryService("a9fe5e12-de71-4020-b2cf-8bf764fb0a8d");
+                target.innerText = 'getPrimaryService';
+            })
+            .then(service => {
+                service.getCharacteristic("a9fe5e12-de71-4020-b2cf-8bf765fb0a8d");
+                target.innerText = 'getCharacteristic';
+            })
             .then(characteristic => {
                 target.innerText = 'characteristic';
                 printCharacteristic = characteristic;
