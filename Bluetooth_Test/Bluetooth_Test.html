@@ -67,8 +67,9 @@
                 //}]
             })
             .then(device => {
+                target.innerText = 'connect start';
                 device.gatt.connect();
-                target.innerText = 'connect';
+                target.innerText = 'connect end';
             })
             .then(server => {
                 server.getPrimaryService("a9fe5e12-de71-4020-b2cf-8bf764fb0a8d");
@@ -85,7 +86,6 @@
             })
             .catch(error => { 
                 target.innerText = 'error';
-                alert("error");
             });
         });
             
