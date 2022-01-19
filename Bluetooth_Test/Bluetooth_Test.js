@@ -13,11 +13,12 @@
       this.server = null;
     }
     connect() {
-      return navigator.Bluetooth.requestDevice({filters:[{services:[ PRINTER_SERVICE ]}]})
-      .then(device => {
-        this.device = device;
-        return device.gatt.connect();
-      })
-    }
+      navigator.bluetooth.requestDevice({
+        acceptAllDevices: true,
+        optionalServices: ['battery_service'] // Required to access service later.
+    })
+    .then(device => { this.device = device; })
+    .catch(error => { console.error(error); });
+  }
   
 })();
