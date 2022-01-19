@@ -42,6 +42,10 @@
                     break;
             }
         };
+          
+        var connect = document.querySelector('#connect_test');
+        var target = document.querySelector('#target');
+        var printCharacteristic = null;
             
         function sendTextData() {
           // Get the bytes for the text
@@ -49,13 +53,10 @@
           // Add line feed + carriage return chars to text
           let text = "test";
           return printCharacteristic.writeValue(text).then(() => {
+            target.innerText = 'test';
             alert("test");;
           });
         }
-            
-        var connect = document.querySelector('#connect_test');
-        var target = document.querySelector('#target');
-        var printCharacteristic = null;
             
         connect.addEventListener('click', function() {
             navigator.bluetooth.requestDevice({
