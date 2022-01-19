@@ -20,6 +20,8 @@
         <p align="center" id="result">
         </p>
         
+        <br/><br/><br/><br/><br/><p id="target"></p>
+        
         <script type="text/javascript" charset="utf-8">
 
         var finishedCallback = function(result){
@@ -52,7 +54,7 @@
         }
             
         var connect = document.querySelector('#connect_test');
-        var result = document.querySelector('#result');
+        var target = document.querySelector('#target');
         var printCharacteristic = null;
             
         connect.addEventListener('click', function() {
@@ -63,6 +65,7 @@
                 //}]
             })
             .then(device => {
+                target.innerText = 'serching device...';
                 console.log('> Found ' + device.name);
                 console.log('Connecting to GATT Server...');
                 return device.gatt.connect();
