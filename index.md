@@ -13,3 +13,6 @@
 
 > It is a sample that open WSWebPrint from other browser. [[sample]](https://woosim.github.io/webprint/urlscheme.html)
 
+### Bluetooth Test
+
+> It is a Bluetooth Test. [[sample]](https://woosim.github.io/webprint/Bluetooth_Test/Bluetooth_Test.html)
