@@ -20,7 +20,7 @@
         <p align="center" id="result">
         </p>
         
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><p id="target">start</p>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><p id="target">Debug Text</p>
         
         <script type="text/javascript" charset="utf-8">
 
@@ -59,6 +59,7 @@
         }
             
         connect.addEventListener('click', function() {
+            target.innerText = 'scan device...';
             navigator.bluetooth.requestDevice({
                 acceptAllDevices: true,
                 //filters: [{
@@ -66,8 +67,8 @@
                 //}]
             })
             .then(device => {
-                target.innerText = 'scan device...';
-                return device.gatt.connect();
+                device.gatt.connect();
+                target.innerText = 'connect';
             })
             .then(server => {
                 server.getPrimaryService("a9fe5e12-de71-4020-b2cf-8bf764fb0a8d");
