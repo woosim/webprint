@@ -46,9 +46,9 @@
         connect.addEventListener('click', function() {
             navigator.bluetooth.requestDevice({
                 acceptAllDevices: true,
-                filters: [{
-                    services: [ 'a9fe5e12-de71-4020-b2cf-8bf764fb0a8d' ]
-                }]
+                //filters: [{
+                //    services: [ 'a9fe5e12-de71-4020-b2cf-8bf764fb0a8d' ]
+                //}]
             })
             .then(device => {
                 console.log('> Found ' + device.name);
