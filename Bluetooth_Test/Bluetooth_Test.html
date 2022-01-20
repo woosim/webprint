@@ -48,14 +48,18 @@
         var printCharacteristic = null;
         var BluetoothDevice = null;
             
+        function handleError(error) {
+          console.log(error);
+        }
+            
         function sendTextData() {
           // Get the bytes for the text
           let encoder = new TextEncoder("utf-8");
           // Add line feed + carriage return chars to text
           let text = "test";
           return printCharacteristic.writeValue(text).then(() => {
-            target.innerText = 'test';
-            alert("test");;
+            target.innerText = 'sendTextData test';
+            console.log('sendTextData test');
           });
         }
             
@@ -70,24 +74,28 @@
                 console.log('> Found ' + device.name);
                 console.log('Connecting to GATT Server...');
                 BluetoothDevice = device;
-                target.innerText = 'connect start';
                 BluetoothDevice.gatt.connect();
-                target.innerText = 'connect end';
+                target.innerText = 'connect() test';
+                console.log('Connect() test');
             })
             .then(server => {
                 server.getPrimaryService("a9fe5e12-de71-4020-b2cf-8bf764fb0a8d");
-                target.innerText = 'getPrimaryService';
+                target.innerText = 'getPrimaryService test';
+                console.log('getPrimaryService test');
             })
             .then(service => {
                 service.getCharacteristic("a9fe5e12-de71-4020-b2cf-8bf765fb0a8d");
                 target.innerText = 'getCharacteristic';
+                console.log('getCharacteristic test');
             })
             .then(characteristic => {
                 target.innerText = 'characteristic';
+                console.log('characteristic test');
                 printCharacteristic = characteristic;
                 sendTextData();
             })
             .catch(error => { 
+                handleError(error);
                 target.innerText = 'error';
             });
         });
