@@ -66,6 +66,8 @@
                 optionalServices: ['a9fe5e12-de71-4020-b2cf-8bf764fb0a8d'],
             })
             .then(device => {
+                console.log('> Found ' + device.name);
+                console.log('Connecting to GATT Server...');
                 BluetoothDevice = device;
                 target.innerText = 'connect start';
                 BluetoothDevice.gatt.connect();
