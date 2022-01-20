@@ -58,7 +58,7 @@
           // Add line feed + carriage return chars to text
           let text = "test";
           //return printCharacteristic.writeValue(text).then(() => {
-          return BluetoothRemoteGATTDescriptor.writeValue(text).then(() => {
+          BluetoothRemoteGATTDescriptor.writeValue(text).then(() => {
             target.innerText = 'sendTextData test';
             console.log('sendTextData test');
           });
