@@ -57,7 +57,7 @@
           let text = "test";
             
           var buffer = new ArrayBuffer(12);
-          var view = new DataView(buffer, 2, 2);
+          var view = new DataView(buffer);
           view[0] = 0;
           //return printCharacteristic.writeValue(text).then(() => {
           BluetoothRemoteGATTCharacteristic.writeValueWithResponse(view).then(function() {
