@@ -47,17 +47,15 @@
         var target = document.querySelector('#target');
         var printCharacteristic = null;
         var BluetoothDevice = null;
-        var uuid = BluetoothRemoteGATTDescriptor.uuid
             
         function handleError(error) {
           console.log(error);
         }
             
         function sendTextData() {
-          // Get the bytes for the text
           let encoder = new TextEncoder("utf-8");
-          // Add line feed + carriage return chars to text
           let text = "test";
+            
           var buffer = new ArrayBuffer(12);
           var view = new DataView(buffer, 2, 2);
           view[0] = 0;
@@ -80,7 +78,10 @@
             })
             .then(device => {
                 console.log('> Found ' + device.name);
-                console.log('> Found ' + uuid);
+                console.log('> Found ' + BluetoothRemoteGATTCharacteristic.service);
+                console.log('> Found ' + BluetoothRemoteGATTCharacteristic.uuid);
+                console.log('> Found ' + BluetoothRemoteGATTCharacteristic.properties);
+                console.log('> Found ' + BluetoothRemoteGATTCharacteristic.value);
                 console.log('Connecting to GATT Server...');
                 BluetoothDevice = device;
                 BluetoothDevice.gatt.connect();
