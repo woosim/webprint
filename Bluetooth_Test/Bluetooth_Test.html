@@ -47,6 +47,7 @@
         var target = document.querySelector('#target');
         var printCharacteristic = null;
         var BluetoothDevice = null;
+        var uuid = BluetoothRemoteGATTDescriptor.uuid
             
         function handleError(error) {
           console.log(error);
@@ -57,8 +58,8 @@
           let encoder = new TextEncoder("utf-8");
           // Add line feed + carriage return chars to text
           let text = "test";
-          //return printCharacteristic.writeValue(text).then(() => {
-          BluetoothRemoteGATTDescriptor.writeValue(text).then(() => {
+          return printCharacteristic.writeValue(text).then(() => {
+          //BluetoothRemoteGATTDescriptor.writeValue(text).then(() => {
             target.innerText = 'sendTextData test';
             console.log('sendTextData test');
           });
@@ -76,6 +77,7 @@
             })
             .then(device => {
                 console.log('> Found ' + device.name);
+                console.log('> Found ' + device.uuid);
                 console.log('Connecting to GATT Server...');
                 BluetoothDevice = device;
                 BluetoothDevice.gatt.connect();
