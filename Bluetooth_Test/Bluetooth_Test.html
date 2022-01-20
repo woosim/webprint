@@ -46,6 +46,7 @@
         var connect = document.querySelector('#connect_test');
         var target = document.querySelector('#target');
         var printCharacteristic = null;
+        var BluetoothDevice = null;
             
         function sendTextData() {
           // Get the bytes for the text
@@ -65,8 +66,9 @@
                 optionalServices: ['a9fe5e12-de71-4020-b2cf-8bf764fb0a8d'],
             })
             .then(device => {
+                BluetoothDevice = device;
                 target.innerText = 'connect start';
-                device.gatt.connect();
+                BluetoothDevice.gatt.connect();
                 target.innerText = 'connect end';
             })
             .then(server => {
