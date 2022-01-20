@@ -57,7 +57,8 @@
           let encoder = new TextEncoder("utf-8");
           // Add line feed + carriage return chars to text
           let text = "test";
-          return printCharacteristic.writeValue(text).then(() => {
+          //return printCharacteristic.writeValue(text).then(() => {
+          return BluetoothRemoteGATTDescriptor.writeValue(text).then(() => {
             target.innerText = 'sendTextData test';
             console.log('sendTextData test');
           });
