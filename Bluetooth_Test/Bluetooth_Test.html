@@ -58,8 +58,7 @@
           var buffer = new ArrayBuffer(12);
           var view = new DataView(buffer);
           view[0] = 0;
-          //return printCharacteristic.writeValue(text).then(() => {
-          BluetoothRemoteGATTCharacteristic.writeValueWithResponse(view).then(function() {
+          printCharacteristic.writeValue(text).then(() => {
             target.innerText = 'sendTextData test';
             console.log('sendTextData test' + view);
           });
@@ -79,8 +78,6 @@
                 console.log('device.name      : ' + device.name);
                 console.log('device.id        : ' + device.id);
                 console.log('device.connected : ' + device.connected);
-                console.log('> Found ' + BluetoothRemoteGATTCharacteristic.properties);
-                console.log('> Found ' + BluetoothRemoteGATTCharacteristic.value);
                 console.log('Connecting to GATT Server...');
                 BluetoothDevice = device;
                 BluetoothDevice.gatt.connect();
@@ -88,11 +85,11 @@
                 console.log('Connect() success');
             })
             .then(server => {
-                log('Getting GAP Service...');
+                console.log('Getting GAP Service...');
                 return server.getPrimaryService('generic_access');
             })
             .then(service => {
-                log('Getting GAP Characteristics...');
+                console.log('Getting GAP Characteristics...');
                 return service.getCharacteristics();
             })
             .then(characteristic => {
@@ -103,7 +100,7 @@
             })
             .catch(error => { 
                 handleError(error);
-                target.innerText = 'error'+error;
+                target.innerText = error;
             });
         });
             
