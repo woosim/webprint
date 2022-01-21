@@ -47,16 +47,6 @@
         var printCharacteristic = null;
         var BluetoothDevice = null;
             
-        function sendTextData(characteristics) {
-          return characteristics.readValue().then(value => {
-            console.log('Device Name : ' + new TextDecoder().decode(value));
-          })
-          .catch(error => { 
-            console.log(error);
-            target.innerText = error;
-          });
-        }
-            
         connect.addEventListener('click', function() {
             target.innerText = 'scan device...';
             console.log('scan device...');
@@ -95,7 +85,7 @@
                 console.log('characteristic test');
                 
                 let queue = Promise.resolve();
-                queue = queue.then(_ => sendTextData(characteristics));
+                //queue = queue.then(_ => sendTextData(characteristics));
                 return queue;
             })
             .catch(error => { 
@@ -103,6 +93,16 @@
                 target.innerText = error;
             });
         });
+            
+        function sendTextData(characteristics) {
+          return characteristics.readValue().then(value => {
+            console.log('Device Name : ' + new TextDecoder().decode(value));
+          })
+          .catch(error => { 
+            console.log(error);
+            target.innerText = error;
+          });
+        }
             
         disconnect.addEventListener('click', function() {
             console.log(BluetoothDevice);
