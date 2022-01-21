@@ -77,16 +77,18 @@
             })
             .then(service => {
                 console.log('Getting GAP Characteristics...');
-                //BluetoothRemoteGATTService.getCharacteristics();
+                //BluetoothRemoteGATTService.getCharacteristic(a9fe5e12-de71-4020-b2cf-8bf765fb0a8d);
                 return service.getCharacteristics();
             })
-            .then(characteristics => {
+            .then(characteristic => {
                 target.innerText = 'characteristic test';
                 console.log('characteristic test');
                 
-                let queue = Promise.resolve();
+                const test = Uint8Array();
+                return characteristic.writeValue(test);
+                //let queue = Promise.resolve();
                 //queue = queue.then(_ => sendTextData(characteristics));
-                return queue;
+                //return queue;
             })
             .catch(error => { 
                 console.log(error);
