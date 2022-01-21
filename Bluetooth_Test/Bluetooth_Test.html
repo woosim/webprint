@@ -85,23 +85,23 @@
                 console.log('Connecting to GATT Server...');
                 BluetoothDevice = device;
                 BluetoothDevice.gatt.connect();
-                target.innerText = 'connect() test';
-                console.log('Connect() test');
+                target.innerText = 'connect() success';
+                console.log('Connect() success');
             })
-//
-//            .then(server => {
-//                server.getPrimaryService("a9fe5e12-de71-4020-b2cf-8bf764fb0a8d");
-//                target.innerText = 'getPrimaryService test';
-//                console.log('getPrimaryService test');
-//            })
-//            .then(service => {
-//                service.getCharacteristic("a9fe5e12-de71-4020-b2cf-8bf765fb0a8d");
-//                target.innerText = 'getCharacteristic';
-//                console.log('getCharacteristic test');
-//            })
-//
+
+            .then(server => {
+                server.getPrimaryService('a9fe5e12-de71-4020-b2cf-8bf764fb0a8d');
+                target.innerText = 'getPrimaryService test';
+                console.log('getPrimaryService test');
+            })
+            .then(service => {
+                service.getCharacteristic('a9fe5e12-de71-4020-b2cf-8bf765fb0a8d');
+                target.innerText = 'getCharacteristic';
+                console.log('getCharacteristic test');
+            })
+
             .then(characteristic => {
-                target.innerText = 'characteristic';
+                target.innerText = 'characteristic test';
                 console.log('characteristic test');
                 printCharacteristic = characteristic;
                 sendTextData();
