@@ -78,6 +78,7 @@
                 console.log('Connecting to GATT Server...');
                 BluetoothDevice = device;
                 BluetoothDevice.gatt.connect();
+                BluetoothRemoteGATTServer.connect()
                 
                 console.log('device.name      : ' + BluetoothDevice.name);
                 console.log('device.id        : ' + BluetoothDevice.id);
