@@ -84,6 +84,9 @@
                 target.innerText = 'characteristic test';
                 console.log('characteristic test');
                 
+                characteristic.readValue().then(value => {
+                    log('> Device Name: ' + new TextDecoder().decode(value));
+                });
                 const test = new Uint8Array();
                 return characteristic.writeValue(test);
                 //let queue = Promise.resolve();
