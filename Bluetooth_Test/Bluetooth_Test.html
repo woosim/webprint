@@ -94,7 +94,7 @@
             })
             .then(service => {
                 console.log('Getting GAP Characteristics...');
-                BluetoothGATTService.getCharacteristics();
+                BluetoothRemoteGATTService.getCharacteristics();
                 return service.getCharacteristics();
             })
             .then(characteristic => {
