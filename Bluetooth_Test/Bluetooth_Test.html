@@ -87,18 +87,14 @@
                 target.innerText = 'connect() success';
                 console.log('Connect() success');
             })
-            /*
             .then(server => {
-                server.getPrimaryService('a9fe5e12-de71-4020-b2cf-8bf764fb0a8d');
-                target.innerText = 'getPrimaryService test';
-                console.log('getPrimaryService test');
+                log('Getting GAP Service...');
+                return server.getPrimaryService('generic_access');
             })
             .then(service => {
-                service.getCharacteristic('a9fe5e12-de71-4020-b2cf-8bf765fb0a8d');
-                target.innerText = 'getCharacteristic';
-                console.log('getCharacteristic test');
+                log('Getting GAP Characteristics...');
+                return service.getCharacteristics();
             })
-            */
             .then(characteristic => {
                 target.innerText = 'characteristic test';
                 console.log('characteristic test');
@@ -107,7 +103,7 @@
             })
             .catch(error => { 
                 handleError(error);
-                target.innerText = 'error';
+                target.innerText = 'error'+error;
             });
         });
             
