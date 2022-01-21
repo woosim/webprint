@@ -79,9 +79,9 @@
                 BluetoothDevice = device;
                 BluetoothDevice.gatt.connect();
                 
-                console.log('device.name      : ' + device.name);
-                console.log('device.id        : ' + device.id);
-                console.log('device.connected : ' + device.gatt.connected);
+                console.log('device.name      : ' + BluetoothDevice.name);
+                console.log('device.id        : ' + BluetoothDevice.id);
+                console.log('device.connected : ' + BluetoothDevice.gatt.connected);
                 
                 target.innerText = 'connect() success';
                 console.log('Connect() success');
@@ -107,10 +107,12 @@
         });
             
         disconnect.addEventListener('click', function() {
+            console.log(BluetoothDevice);
             if(!BluetoothDevice) {
                 target.innerText = 'false';
                 console.log('false');
             }
+            console.log(BluetoothDevice.gatt.connected);
             if(BluetoothDevice.gatt.connected) {
                 BluetoothDevice.gatt.disconnect();
                 target.innerText = 'disconnect device';
