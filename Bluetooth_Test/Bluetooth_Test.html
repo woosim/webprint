@@ -76,9 +76,9 @@
                 optionalServices: ['a9fe5e12-de71-4020-b2cf-8bf764fb0a8d']
             })
             .then(device => {
-                console.log('> Found ' + device.name);
-                console.log('> Found ' + BluetoothRemoteGATTCharacteristic.service);
-                console.log('> Found ' + BluetoothRemoteGATTCharacteristic.uuid);
+                console.log('device.name      : ' + device.name);
+                console.log('device.id        : ' + device.id);
+                console.log('device.connected : ' + device.connected);
                 console.log('> Found ' + BluetoothRemoteGATTCharacteristic.properties);
                 console.log('> Found ' + BluetoothRemoteGATTCharacteristic.value);
                 console.log('Connecting to GATT Server...');
