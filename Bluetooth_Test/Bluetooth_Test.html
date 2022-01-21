@@ -83,15 +83,19 @@
             .then(characteristic => {
                 target.innerText = 'characteristic test';
                 console.log('characteristic test');
-                
+                /*
                 characteristic.readValue().then(value => {
                     log('> Device Name: ' + new TextDecoder().decode(value));
                 });
                 const test = new Uint8Array();
-                return characteristic.writeValue(test);
+                */
+                return characteristic.readValue();
                 //let queue = Promise.resolve();
                 //queue = queue.then(_ => sendTextData(characteristics));
                 //return queue;
+            })
+            .then(value => {
+                console.log('log is ${value.getUint8(0)}');
             })
             .catch(error => { 
                 console.log(error);
