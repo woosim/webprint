@@ -75,12 +75,14 @@
                 optionalServices: ['a9fe5e12-de71-4020-b2cf-8bf764fb0a8d']
             })
             .then(device => {
-                console.log('device.name      : ' + device.name);
-                console.log('device.id        : ' + device.id);
-                console.log('device.connected : ' + device.connected);
                 console.log('Connecting to GATT Server...');
                 BluetoothDevice = device;
                 BluetoothDevice.gatt.connect();
+                
+                console.log('device.name      : ' + device.name);
+                console.log('device.id        : ' + device.id);
+                console.log('device.connected : ' + device.connected);
+                
                 target.innerText = 'connect() success';
                 console.log('Connect() success');
             })
