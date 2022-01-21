@@ -47,20 +47,20 @@
         var printCharacteristic = null;
         var BluetoothDevice = null;
             
-        function handleError(error) {
-          console.log(error);
-        }
-            
         function sendTextData() {
           let encoder = new TextEncoder("utf-8");
           let text = "test";
-            
           var buffer = new ArrayBuffer(12);
           var view = new DataView(buffer);
           view[0] = 0;
+            
           printCharacteristic.writeValue(text).then(() => {
             target.innerText = 'sendTextData test';
             console.log('sendTextData test' + view);
+          })
+          .catch(error => { 
+            console.log(error);
+            target.innerText = error;
           });
         }
             
@@ -99,7 +99,7 @@
                 sendTextData();
             })
             .catch(error => { 
-                handleError(error);
+                console.log(error);
                 target.innerText = error;
             });
         });
