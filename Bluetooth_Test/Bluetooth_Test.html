@@ -88,7 +88,7 @@
             })
             .then(server => {
                 console.log('Getting GAP Service...');
-                return server.getPrimaryService('generic_access');
+                server.getPrimaryService('generic_access');
             })
             .then(service => {
                 console.log('Getting GAP Characteristics...');
