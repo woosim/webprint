@@ -13,20 +13,18 @@
     </head>
    
     <body>
-        <p align="center">
-            <button id="connect_test" class="buttons">CONNECT</button>
-        </p>
+        <p align="center"><button id="connect_test" class="buttons">Scan Device</button></p>
         <br/>
-        <p align="center" id="result">
-        </p>
-        
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><p id="target">Debug Text</p>
+        <p align="center"><button id="disconnect_test" class="buttons">Disconnect Device</button></p>
+        <br/>
+        <p align="center" id="result"></p>
+        <br/>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><p align="center" id="target">Debug Text</p>
         
         <script type="text/javascript" charset="utf-8">
 
         var finishedCallback = function(result){
             var code = result['ERR_CODE'];
-            
             switch(code)
             {
                 case "0": 
@@ -44,6 +42,7 @@
         };
           
         var connect = document.querySelector('#connect_test');
+        var disconnect = document.querySelector('#disconnect_test');
         var target = document.querySelector('#target');
         var printCharacteristic = null;
         var BluetoothDevice = null;
@@ -110,6 +109,12 @@
                 handleError(error);
                 target.innerText = 'error';
             });
+        });
+            
+        disconnect.addEventListener('click', function() {
+            target.innerText = 'disconnect device';
+            console.log('disconnect device');
+            bluetoothDevice.gatt.disconnect();
         });
             
         </script>
