@@ -78,7 +78,7 @@
                 console.log('Connecting to GATT Server...');
                 BluetoothDevice = device;
                 BluetoothDevice.gatt.connect();
-                BluetoothRemoteGATTServer.connect()
+                BluetoothRemoteGATTServer.connect();
                 
                 console.log('device.name      : ' + BluetoothDevice.name);
                 console.log('device.id        : ' + BluetoothDevice.id);
@@ -89,7 +89,8 @@
             })
             .then(server => {
                 console.log('Getting GAP Service...');
-                server.getPrimaryService('generic_access');
+                BluetoothRemoteGATTServer.getPrimaryService();
+                return server.getPrimaryService('generic_access');
             })
             .then(service => {
                 console.log('Getting GAP Characteristics...');
