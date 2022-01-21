@@ -109,12 +109,12 @@
         });
             
         disconnect.addEventListener('click', function() {
-            console.log(BluetoothDevice);
+            console.log('BluetoothDevice' : + BluetoothDevice);
             if(!BluetoothDevice) {
                 target.innerText = 'false';
                 console.log('false');
             }
-            console.log(BluetoothDevice.gatt.connected);
+            console.log('gatt.connected : '+BluetoothDevice.gatt.connected);
             if(BluetoothDevice.gatt.connected) {
                 BluetoothDevice.gatt.disconnect();
                 target.innerText = 'disconnect device';
