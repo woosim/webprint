@@ -47,16 +47,9 @@
         var printCharacteristic = null;
         var BluetoothDevice = null;
             
-        function sendTextData() {
-          let encoder = new TextEncoder("utf-8");
-          let text = "test";
-          var buffer = new ArrayBuffer(12);
-          var view = new DataView(buffer);
-          view[0] = 0;
-            
-          printCharacteristic.writeValue(text).then(() => {
-            target.innerText = 'sendTextData test';
-            console.log('sendTextData test' + view);
+        function sendTextData(characteristics) {
+          return characteristics.readValue().then(value => {
+            console.log('Device Name : ' + new TextDecoder().decode(value));
           })
           .catch(error => { 
             console.log(error);
@@ -97,11 +90,13 @@
                 //BluetoothRemoteGATTService.getCharacteristics();
                 return service.getCharacteristics();
             })
-            .then(characteristic => {
+            .then(characteristics => {
                 target.innerText = 'characteristic test';
                 console.log('characteristic test');
-                printCharacteristic = characteristic;
-                sendTextData();
+                
+                let queue = Promise.resolve();
+                queue = queue.then(_ => sendTextData(characteristics));
+                return queue;
             })
             .catch(error => { 
                 console.log(error);
