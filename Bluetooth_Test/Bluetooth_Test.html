@@ -84,7 +84,7 @@
                 target.innerText = 'characteristic test';
                 console.log('characteristic test');
                 
-                const test = Uint8Array();
+                const test = new Uint8Array();
                 return characteristic.writeValue(test);
                 //let queue = Promise.resolve();
                 //queue = queue.then(_ => sendTextData(characteristics));
