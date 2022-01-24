@@ -19,7 +19,7 @@
         <br/>
         <p align="center" id="result"></p>
         <br/>
-        <br/><br/><br/><br/><br/><br/><br/><p align="center" id="target">Debug Text</p>
+        <br/><br/><br/><br/><br/><br/><p align="center" id="target">Debug Text</p>
         
         <script type="text/javascript" charset="utf-8">
 
@@ -47,7 +47,7 @@
         var printCharacteristic = null;
         var BluetoothDevice = null;
         
-            
+        
         connect.addEventListener('click', function() {
             target.innerText = 'scan device...';
             console.log('scan device...');
@@ -59,27 +59,29 @@
                 optionalServices: ['a9fe5e12-de71-4020-b2cf-8bf764fb0a8d']
             })
             .then(device => {
-                console.log('Connecting to GATT Server...');
                 BluetoothDevice = device;
                 console.log('gatt.connected : ' + BluetoothDevice.gatt.connected);
+                console.log('Connecting to GATT Server...');
+                BluetoothDevice.BluetoothRemoteGATTServer.connect();
                 return BluetoothDevice.gatt.connect();
-                //BluetoothRemoteGATTServer.connect();
+                //
             })
             .then(server => {
                 console.log('device.name    : ' + BluetoothDevice.name);
                 console.log('device.id      : ' + BluetoothDevice.id);
                 console.log('gatt.connected : ' + BluetoothDevice.gatt.connected);
+                console.log('RemoteGATTServer : ' + BluetoothDevice.BluetoothRemoteGATTServer.connected);
                 
                 target.innerText = 'connect() success';
                 console.log('Connect() success');
                 
                 console.log('Getting GAP Service...');
-                //BluetoothRemoteGATTServer.getPrimaryService();
+                //BluetoothDevice.BluetoothRemoteGATTServer.getPrimaryService('a9fe5e12-de71-4020-b2cf-8bf764fb0a8d');
                 return server.getPrimaryService('a9fe5e12-de71-4020-b2cf-8bf764fb0a8d');
             })
             .then(service => {
                 console.log('Getting GAP Characteristics...');
-                //BluetoothRemoteGATTService.getCharacteristic('a9fe5e12-de71-4020-b2cf-8bf765fb0a8d');
+                //BluetoothDevice.BluetoothRemoteGATTService.getCharacteristic('a9fe5e12-de71-4020-b2cf-8bf765fb0a8d');
                 return service.getCharacteristic('a9fe5e12-de71-4020-b2cf-8bf765fb0a8d');
             })
             .then(characteristic => {
