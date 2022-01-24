@@ -61,26 +61,25 @@
             .then(device => {
                 BluetoothDevice = device;
                 console.log('gatt.connected : ' + BluetoothDevice.gatt.connected);
-                console.log('Connecting to GATT Server...');
+                console.log('Connecting to gatt.connect...');
                 //BluetoothDevice.BluetoothRemoteGATTServer.connect();
                 return BluetoothDevice.gatt.connect();
                 //
             })
             .then(server => {
+                console.log('gatt.connected : ' + BluetoothDevice.gatt.connected);
                 console.log('device.name    : ' + BluetoothDevice.name);
                 console.log('device.id      : ' + BluetoothDevice.id);
-                console.log('gatt.connected : ' + BluetoothDevice.gatt.connected);
-                console.log('RemoteGATTServer : ' + BluetoothDevice.BluetoothRemoteGATTServer.connected);
                 
                 target.innerText = 'connect() success';
                 console.log('Connect() success');
                 
-                console.log('Getting GAP Service...');
+                console.log('getPrimaryService...');
                 //BluetoothDevice.BluetoothRemoteGATTServer.getPrimaryService('a9fe5e12-de71-4020-b2cf-8bf764fb0a8d');
                 return server.getPrimaryService('a9fe5e12-de71-4020-b2cf-8bf764fb0a8d');
             })
             .then(service => {
-                console.log('Getting GAP Characteristics...');
+                console.log('getCharacteristic...');
                 //BluetoothDevice.BluetoothRemoteGATTService.getCharacteristic('a9fe5e12-de71-4020-b2cf-8bf765fb0a8d');
                 return service.getCharacteristic('a9fe5e12-de71-4020-b2cf-8bf765fb0a8d');
             })
