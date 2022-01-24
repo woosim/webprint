@@ -50,7 +50,6 @@
             
         connect.addEventListener('click', function() {
             target.innerText = 'scan device...';
-            console.log('gatt.connected : ' + BluetoothDevice.gatt.connected);
             console.log('scan device...');
             navigator.bluetooth.requestDevice({
                 //acceptAllDevices: true,
@@ -62,6 +61,7 @@
             .then(device => {
                 console.log('Connecting to GATT Server...');
                 BluetoothDevice = device;
+                console.log('gatt.connected : ' + BluetoothDevice.gatt.connected);
                 return BluetoothDevice.gatt.connect();
                 //BluetoothRemoteGATTServer.connect();
             })
