@@ -110,7 +110,9 @@
         });
             
         function sendTextData() {
-            let text = "test"
+          let test = "test"
+          let encoder = new TextEncoder("utf-8");
+          let text = encoder.encode(test.value);
           return printCharacteristic.writeValue(text).then(() => {
             console.log('test : ' + text );
           })
