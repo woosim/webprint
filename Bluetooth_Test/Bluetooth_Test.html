@@ -46,6 +46,7 @@
         var target = document.querySelector('#target');
         var printCharacteristic = null;
         var BluetoothDevice = null;
+        console.log('gatt.connected : ' + BluetoothDevice.gatt.connected);
             
         connect.addEventListener('click', function() {
             target.innerText = 'scan device...';
