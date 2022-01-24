@@ -86,6 +86,8 @@
             .then(characteristic => {
                 target.innerText = 'characteristic test';
                 console.log('characteristic test');
+                printCharacteristic = characteristic;
+                sendTextData();
                 /*
                 characteristic.readValue().then(value => {
                     log('> Device Name: ' + new TextDecoder().decode(value));
@@ -107,9 +109,10 @@
             });
         });
             
-        function sendTextData(characteristics) {
-          return characteristics.readValue().then(value => {
-            console.log('Device Name : ' + new TextDecoder().decode(value));
+        function sendTextData() {
+            let text = "test"
+          return printCharacteristic.writeValue(text).then(() => {
+            console.log('test : ' + text );
           })
           .catch(error => { 
             console.log(error);
