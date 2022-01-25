@@ -4,6 +4,7 @@
 <style>
     body,head{color:#666;font:14px "Roboto", sans-serif;-webkit-font-smoothing:antialiased;background-color:#eee}
 </style>
+
 <html>
     <head>
         <script type="text/javascript" charset="utf-8" src='../js/jquery-1.11.1.min.js'></script>
@@ -13,43 +14,26 @@
     </head>
    
     <body>
-        <p align="center"><button id="connect_test" class="buttons">Scan Device</button></p>
+        <p align="center"><button id="scan" class="buttons">Scan Device</button></p>
         <br/>
-        <p align="center"><button id="disconnect_test" class="buttons">Disconnect Device</button></p>
+        <p align="center"><button id="print" class="buttons">Print Sample</button></p>
         <br/>
-        <p align="center" id="result"></p>
+        <p align="center"><button id="disconnect" class="buttons">Disconnect Device</button></p>
         <br/>
-        <br/><br/><br/><br/><br/><br/><p align="center" id="target">Debug Text</p>
+        <br/><br/><br/><br/><p align="center" id="debug">Debug Text</p>
         
         <script type="text/javascript" charset="utf-8">
-
-        var finishedCallback = function(result){
-            var code = result['ERR_CODE'];
-            switch(code)
-            {
-                case "0": 
-                    alert("Success");
-                    break;
-                case "1": 
-                    alert("Printer is not connected.");
-                    break;
-                case "4": 
-                    alert("Session is not opened.");
-                    break;
-                default:
-                    break;
-            }
-        };
           
-        var connect = document.querySelector('#connect_test');
-        var disconnect = document.querySelector('#disconnect_test');
-        var target = document.querySelector('#target');
-        var printCharacteristic = null;
-        var BluetoothDevice = null;
+        let connect = document.querySelector('#scan');
+        let print = document.querySelector('#print');
+        let disconnect = document.querySelector('#disconnect');
+        let debug = document.querySelector('#debug');
+        let printCharacteristic = null;
+        let BluetoothDevice = null;
         
         
         connect.addEventListener('click', function() {
-            target.innerText = 'scan device...';
+            debug.innerText = 'scan device...';
             console.log('scan device...');
             navigator.bluetooth.requestDevice({
                 //acceptAllDevices: true,
@@ -71,7 +55,7 @@
                 console.log('device.name    : ' + BluetoothDevice.name);
                 console.log('device.id      : ' + BluetoothDevice.id);
                 
-                target.innerText = 'connect() success';
+                debug.innerText = 'connect() success';
                 console.log('Connect() success');
                 
                 console.log('getPrimaryService...');
@@ -84,7 +68,7 @@
                 return service.getCharacteristic('a9fe5e12-de71-4020-b2cf-8bf766fb0a8d');
             })
             .then(characteristic => {
-                target.innerText = 'characteristic test';
+                debug.innerText = 'characteristic test';
                 console.log('characteristic test');
                 printCharacteristic = characteristic;
                 sendTextData();
@@ -105,7 +89,7 @@
             })
             .catch(error => { 
                 console.log(error);
-                target.innerText = error;
+                debug.innerText = error;
             });
         });
             
@@ -122,7 +106,7 @@
             })
             .catch(error => { 
                 console.log(error);
-                target.innerText = error;
+                debug.innerText = error;
             });
         }
         
@@ -135,16 +119,16 @@
         disconnect.addEventListener('click', function() {
             console.log(BluetoothDevice);
             if(!BluetoothDevice) {
-                target.innerText = 'false';
+                debug.innerText = 'false';
                 console.log('false');
             }
             console.log('gatt.connected : ' + BluetoothDevice.gatt.connected);
             if(BluetoothDevice.gatt.connected) {
                 BluetoothDevice.gatt.disconnect();
-                target.innerText = 'disconnect device';
+                debug.innerText = 'disconnect device';
                 console.log('disconnect device');
             } else {
-                target.innerText = 'Bluetooth Device is already disconnected';
+                debug.innerText = 'Bluetooth Device is already disconnected';
                 console.log('Bluetooth Device is already disconnected');
             }
         });
