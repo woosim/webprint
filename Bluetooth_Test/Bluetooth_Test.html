@@ -114,14 +114,14 @@
           let encoder = new TextEncoder("utf-8");
           let text = encoder.encode(test.value);
           await printCharacteristic.writeValue(text)
-          .then(() => this.delayPromise(10))
-          .then(() => {
-            console.log('test : ' + text );
-          })
-          .catch(error => { 
-            console.log(error);
-            target.innerText = error;
-          });
+            .then(() => this.delayPromise(10))
+            .then(() => {
+                console.log('test : ' + text );
+            })
+            .catch(error => { 
+                console.log(error);
+                target.innerText = error;
+            });
         }
         
         function delayPromise(delay) {
