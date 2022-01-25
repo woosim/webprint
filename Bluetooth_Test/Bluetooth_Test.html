@@ -80,7 +80,7 @@
             })
             .then(service => {
                 console.log('getCharacteristic...');
-                //BluetoothDevice.BluetoothRemoteGATTService.getCharacteristic('a9fe5e12-de71-4020-b2cf-8bf765fb0a8d');
+                //BluetoothDevice.BluetoothRemoteGATTService.getCharacteristic('a9fe5e12-de71-4020-b2cf-8bf766fb0a8d');
                 return service.getCharacteristic('a9fe5e12-de71-4020-b2cf-8bf765fb0a8d');
             })
             .then(characteristic => {
@@ -113,9 +113,9 @@
           let test = "test"
           let encoder = new TextEncoder("utf-8");
           let text = encoder.encode(test.value);
-          //await printCharacteristic.writeValue(text)
+          await printCharacteristic.writeValue(new Uint8Array([0x41, 0x42, 0x43, 0x0A, 0x00, 0x00, 0x00, 0x00]))
           //await printCharacteristic.writeValue(new Uint8Array([0x41, 0x42, 0x43, 0x0A, 0x00, 0x00, 0x00, 0x00]))
-          await printCharacteristic.writeValueWithResponse(new Uint8Array([0x41, 0x42, 0x43, 0x0A, 0x00, 0x00, 0x00, 0x00]))
+          //await printCharacteristic.writeValueWithResponse(new Uint8Array([0x41, 0x42, 0x43, 0x0A, 0x00, 0x00, 0x00, 0x00]))
             .then(() => this.delayPromise(10))
             .then(() => {
                 console.log('test : ' + text );
