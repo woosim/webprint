@@ -114,7 +114,8 @@
           let encoder = new TextEncoder("utf-8");
           let text = encoder.encode(test.value);
           //await printCharacteristic.writeValue(text)
-          await printCharacteristic.writeValue(new Uint8Array([0x41, 0x42, 0x43, 0x0A, 0x00, 0x00, 0x00, 0x00]))
+          //await printCharacteristic.writeValue(new Uint8Array([0x41, 0x42, 0x43, 0x0A, 0x00, 0x00, 0x00, 0x00]))
+          await printCharacteristic.writeValueWithResponse(new Uint8Array([0x41, 0x42, 0x43, 0x0A, 0x00, 0x00, 0x00, 0x00]))
             .then(() => this.delayPromise(10))
             .then(() => {
                 console.log('test : ' + text );
