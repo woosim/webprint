@@ -62,7 +62,8 @@
             .then(characteristic => {
                 console.log('characteristic and send text data');
                 printCharacteristic = characteristic;
-                sendTextData();
+                console.log('printCharacteristic : ' + printCharacteristic );
+                sendTextData1(); // Connection Success.
             })
             .catch(error => {
                 console.log(error);
@@ -70,13 +71,26 @@
             });
         });
             
-        async function sendTextData() {
-          let sample = new Uint8Array([0x43, 0x6F, 0x6E, 0x6E, 0x65, 0x63, 0x74, 0x69, 0x6F, 0x6E, 0x20, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x2E]);
+        async function sendTextData1() { // Connection Success.
+          let sample1 = new Uint8Array([0x43, 0x6F, 0x6E, 0x6E, 0x65, 0x63, 0x74, 0x69, 0x6F, 0x6E, 0x20,
+                                       0x53, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x2E, 0x0A, 0x0A, 0x0A]);
           await printCharacteristic.writeValue(sample)
             .then(() => this.delayPromise(10))
-            .then(() => {
-                console.log('printCharacteristic : ' + printCharacteristic );
-            })
+            .catch(error => { 
+                console.log(error);
+                debug.innerText = error;
+            });
+        }
+            
+        print.addEventListener('click', function() {
+            
+        }
+                               
+        async function sendTextData2() { // This is sample text.
+          let sample2 = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x73, 0x61, 0x6D,
+                                       0x70, 0x6C, 0x65, 0x20, 0x74, 0x65, 0x78, 0x74, 0x2E, 0x0A, 0x0A, 0x0A]);
+          await printCharacteristic.writeValue(sample2)
+            .then(() => this.delayPromise(10))
             .catch(error => { 
                 console.log(error);
                 debug.innerText = error;
