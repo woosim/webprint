@@ -31,10 +31,9 @@
         let printCharacteristic = null;
         let BluetoothDevice = null;
         
-        
         connect.addEventListener('click', function() {
-            debug.innerText = 'scan device...';
-            console.log('scan device...');
+            debug.innerText = 'Scanning the device...';
+            console.log('Scanning the device...');
             navigator.bluetooth.requestDevice({
                 //acceptAllDevices: true,
                 filters:[{
@@ -44,62 +43,36 @@
             })
             .then(device => {
                 BluetoothDevice = device;
-                console.log('gatt.connected : ' + BluetoothDevice.gatt.connected);
-                console.log('Connecting to gatt.connect...');
-                //BluetoothDevice.BluetoothRemoteGATTServer.connect();
+                console.log('Connecting the device...');
                 return BluetoothDevice.gatt.connect();
-                //
             })
             .then(server => {
+                console.log('gatt.connect() success');
                 console.log('gatt.connected : ' + BluetoothDevice.gatt.connected);
                 console.log('device.name    : ' + BluetoothDevice.name);
                 console.log('device.id      : ' + BluetoothDevice.id);
                 
-                debug.innerText = 'connect() success';
-                console.log('Connect() success');
-                
-                console.log('getPrimaryService...');
-                //BluetoothDevice.BluetoothRemoteGATTServer.getPrimaryService('a9fe5e12-de71-4020-b2cf-8bf764fb0a8d');
+                console.log('server.getPrimaryService...');
                 return server.getPrimaryService('a9fe5e12-de71-4020-b2cf-8bf764fb0a8d');
             })
             .then(service => {
-                console.log('getCharacteristic...');
-                //BluetoothDevice.BluetoothRemoteGATTService.getCharacteristic('a9fe5e12-de71-4020-b2cf-8bf766fb0a8d');
+                console.log('service.getCharacteristic...');
                 return service.getCharacteristic('a9fe5e12-de71-4020-b2cf-8bf766fb0a8d');
             })
             .then(characteristic => {
-                debug.innerText = 'characteristic test';
-                console.log('characteristic test');
+                console.log('characteristic and send text data');
                 printCharacteristic = characteristic;
                 sendTextData();
-                /*
-                characteristic.readValue().then(value => {
-                    log('> Device Name: ' + new TextDecoder().decode(value));
-                });
-                const test = new Uint8Array();
-                
-                return characteristic.readValue();
-                */
-                //let queue = Promise.resolve();
-                //queue = queue.then(_ => sendTextData(characteristics));
-                //return queue;
             })
-            .then(value => {
-                console.log('log is ${value.getUint8(0)}');
-            })
-            .catch(error => { 
+            .catch(error => {
                 console.log(error);
                 debug.innerText = error;
             });
         });
             
         async function sendTextData() {
-          let test = "test"
-          let encoder = new TextEncoder("utf-8");
-          let text = encoder.encode(test.value);
+          let sample = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x0A, 0x0A, 0x0A]);
           await printCharacteristic.writeValue(new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x0A, 0x0A, 0x0A]))
-          //await printCharacteristic.writeValue(new Uint8Array([0x41, 0x42, 0x43, 0x0A, 0x00, 0x00, 0x00, 0x00]))
-          //await printCharacteristic.writeValueWithResponse(new Uint8Array([0x41, 0x42, 0x43, 0x0A, 0x00, 0x00, 0x00, 0x00]))
             .then(() => this.delayPromise(10))
             .then(() => {
                 console.log('printCharacteristic : ' + printCharacteristic );
@@ -119,14 +92,14 @@
         disconnect.addEventListener('click', function() {
             console.log(BluetoothDevice);
             if(!BluetoothDevice) {
-                debug.innerText = 'false';
-                console.log('false');
+                debug.innerText = 'No device connected.';
+                console.log('No device connected.');
             }
-            console.log('gatt.connected : ' + BluetoothDevice.gatt.connected);
+            console.log('Disconnecting the device...');
             if(BluetoothDevice.gatt.connected) {
                 BluetoothDevice.gatt.disconnect();
-                debug.innerText = 'disconnect device';
-                console.log('disconnect device');
+                debug.innerText = 'Disconnect the device.';
+                console.log('Disconnect the device.');
             } else {
                 debug.innerText = 'Bluetooth Device is already disconnected';
                 console.log('Bluetooth Device is already disconnected');
