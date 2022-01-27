@@ -14,13 +14,13 @@
     </head>
    
     <body>
-        <p align="center"><button id="scan" class="buttons">Scan Device</button></p>
+        <p align="center"><button id="scan" class="buttons">Scan Device</button></p> // Device Scan Button
         <br/>
-        <p align="center"><button id="print" class="buttons">Print Sample</button></p>
+        <p align="center"><button id="print" class="buttons">Print Sample</button></p> // Sample Text Print
         <br/>
-        <p align="center"><button id="disconnect" class="buttons">Disconnect Device</button></p>
+        <p align="center"><button id="disconnect" class="buttons">Disconnect Device</button></p> // Disconnect Device Button
         <br/>
-        <br/><br/><br/><br/><p align="center" id="debug">Debug Text</p>
+        <br/><br/><br/><br/><p align="center" id="debug">Debug Text</p> // Debug용 Text
         
         <script type="text/javascript" charset="utf-8">
           
@@ -31,15 +31,15 @@
         let printCharacteristic = null;
         let BluetoothDevice = null;
         
-        connect.addEventListener('click', function() {
+        connect.addEventListener('click', function() { // Scan Button Click
             debug.innerText = 'Scanning the device...';
             console.log('Scanning the device...');
-            navigator.bluetooth.requestDevice({
-                //acceptAllDevices: true,
+            navigator.bluetooth.requestDevice({ // Scan Device
+                //acceptAllDevices: true, // No Filter All Device Scan
                 filters:[{
-                    name:'WOOSIM-BLE'
+                    name:'WOOSIM-BLE' // Name Filter 'WOOSIM-BLE'에 해당하는 Device Scan
                 }],
-                optionalServices: ['a9fe5e12-de71-4020-b2cf-8bf764fb0a8d']
+                optionalServices: ['a9fe5e12-de71-4020-b2cf-8bf764fb0a8d'] // Printer Service UUID
             })
             .then(device => {
                 BluetoothDevice = device;
@@ -63,7 +63,7 @@
             .then(characteristic => {
                 console.log('characteristic and send text data');
                 printCharacteristic = characteristic;
-                sendTextData1(); // Connection Success.
+                sendTextData1();
             })
             .catch(error => {
                 console.log(error);
@@ -71,9 +71,9 @@
             });
         });
             
-        async function sendTextData1() { // Connection Success.
-          //let sample1 = new Uint8Array([0x43, 0x6F, 0x6E, 0x6E, 0x65, 0x63, 0x74, 0x69, 0x6F, 0x6E, 0x20, 0x53, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x2E, 0x0A, 0x0A, 0x0A]);
-          await printCharacteristic.writeValue(new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x0A, 0x0A, 0x0A]))
+        async function sendTextData1() { // Woosim System
+          let sample1 = new Uint8Array([0x57, 0x6F, 0x6F, 0x73, 0x69, 0x6D, 0x20, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6D, 0x0A, 0x0A, 0x0A]);
+          await printCharacteristic.writeValue(sample1)
             .then(() => this.delayPromise(10))
             .catch(error => { 
                 console.log(error);
@@ -85,9 +85,9 @@
             sendTextData2();
         });
                                
-        async function sendTextData2() { // This is sample text.
-          //let sample2 = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x73, 0x61, 0x6D, 0x70, 0x6C, 0x65, 0x20, 0x74, 0x65, 0x78, 0x74, 0x2E, 0x0A, 0x0A, 0x0A]);
-          await printCharacteristic.writeValue(new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x0A, 0x0A, 0x0A]))
+        async function sendTextData2() { // This is test.
+          let sample2 = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x2E, 0x0A, 0x0A, 0x0A]);
+          await printCharacteristic.writeValue(sample2)
             .then(() => this.delayPromise(10))
             .catch(error => { 
                 console.log(error);
@@ -101,7 +101,7 @@
             });
         }
             
-        disconnect.addEventListener('click', function() {
+        disconnect.addEventListener('click', function() { // Disconnect Button Click
             console.log(BluetoothDevice);
             if(!BluetoothDevice) {
                 debug.innerText = 'No device connected.';
