@@ -22,7 +22,7 @@
         <br/>
         <br/><br/><br/><br/><p align="center" id="debug">Debug Text</p>
         
-        <image id="image" src="../img/woosim.bmp"></img>
+        <image align="center" id="image" src="../img/woosim.bmp"></img>
         
         <script type="text/javascript" charset="utf-8">
           
@@ -96,14 +96,14 @@
               index += 512;
               sendNextImageDataBatch(resolve, reject);
             })
-            .catch(error => reject(error));
+            .catch(error => console.log(error));
           } else {
             // Send the last bytes
             if (index < data.length) {
               printCharacteristic.writeValue(data.slice(index, data.length)).then(() => {
                 resolve();
               })
-              .catch(error => reject(error));
+              .catch(error => console.log(error));
             } else {
               resolve();
             }
