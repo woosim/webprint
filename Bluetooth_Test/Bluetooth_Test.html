@@ -22,7 +22,7 @@
         <br/>
         <br/><br/><br/><br/><p align="center" id="debug">Debug Text</p>
         
-        <image align="center" id="image" src="../img/woosim.bmp"></img>
+        <p align="center"><image id="image" src="../img/woosim.bmp"></img>
         
         <script type="text/javascript" charset="utf-8">
           
@@ -92,7 +92,7 @@
           // Can only write 512 bytes at a time to the characteristic
           // Need to send the image data in 512 byte batches
           if (index + 512 < data.length) {
-            printCharacteristic.writeValue(data.slice(index, index + 512)).then(() => {
+            await printCharacteristic.writeValue(data.slice(index, index + 512)).then(() => {
               index += 512;
               sendNextImageDataBatch(resolve, reject);
             })
@@ -100,7 +100,7 @@
           } else {
             // Send the last bytes
             if (index < data.length) {
-              printCharacteristic.writeValue(data.slice(index, data.length)).then(() => {
+              await printCharacteristic.writeValue(data.slice(index, data.length)).then(() => {
                 resolve();
               })
               .catch(error => console.log(error));
@@ -176,8 +176,8 @@
                                
         async function sendTextData2() { // This is test.
           let sample2 = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x2E, 0x0A, 0x0A, 0x0A]);
-          await printCharacteristic.writeValue(sample2);
-          await printCharacteristic.writeValue(imgArray)
+          //await printCharacteristic.writeValue(imgArray);
+          await printCharacteristic.writeValue(sample2)
             .then(() => this.delayPromise(10))
             .catch(error => { 
                 console.log(error);
