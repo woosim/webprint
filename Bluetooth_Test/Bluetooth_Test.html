@@ -88,7 +88,7 @@
           return printData;
         }
             
-        function sendNextImageDataBatch(resolve, reject) {
+        async function sendNextImageDataBatch(resolve, reject) {
           // Can only write 512 bytes at a time to the characteristic
           // Need to send the image data in 512 byte batches
           if (index + 512 < data.length) {
