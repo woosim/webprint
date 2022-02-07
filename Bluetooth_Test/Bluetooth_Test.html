@@ -93,6 +93,7 @@
           // Need to send the image data in 512 byte batches
           if (index + 512 < data.length) {
             await printCharacteristic.writeValue(data.slice(index, index + 512)).then(() => {
+              this.delayPromise(100);
               index += 512;
               sendNextImageDataBatch();
             })
@@ -101,6 +102,7 @@
             // Send the last bytes
             if (index < data.length) {
               await printCharacteristic.writeValue(data.slice(index, data.length)).then(() => {
+                this.delayPromise(100);
                 //resolve();
               })
               .catch(error => console.log(error));
@@ -160,7 +162,7 @@
         async function sendTextData1() { // Woosim System
           let sample1 = new Uint8Array([0x57, 0x6F, 0x6F, 0x73, 0x69, 0x6D, 0x20, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6D, 0x0A, 0x0A, 0x0A]);
           await printCharacteristic.writeValue(sample1)
-            .then(() => this.delayPromise(10))
+            .then(() => this.delayPromise(100))
             .catch(error => { 
                 console.log(error);
                 debug.innerText = error;
@@ -176,7 +178,7 @@
           let sample2 = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x2E, 0x0A, 0x0A, 0x0A]);
           //await printCharacteristic.writeValue(imgArray);
           await printCharacteristic.writeValue(sample2)
-            .then(() => this.delayPromise(10))
+            .then(() => this.delayPromise(100))
             .catch(error => { 
                 console.log(error);
                 debug.innerText = error;
