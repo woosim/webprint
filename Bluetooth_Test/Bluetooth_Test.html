@@ -171,7 +171,7 @@
             
         print.addEventListener('click', function() {
             sendTextData2();
-            sendImageData();
+            //sendImageData();
         });
                                
         async function sendTextData2() { // This is test.
@@ -183,6 +183,7 @@
                 console.log(error);
                 debug.innerText = error;
             });
+          sendImageData();
         }
         
         function delayPromise(delay) {
