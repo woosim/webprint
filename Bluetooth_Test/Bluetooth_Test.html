@@ -30,6 +30,10 @@
         let debug = document.querySelector('#debug');
         let printCharacteristic = null;
         let BluetoothDevice = null;
+            
+        let imgArray = new Array();
+        imgArray[0] = new Image();
+        imgArray[0].src = '../img/woosim.bmp'
         
         connect.addEventListener('click', function() { // Scan Button Click
             debug.innerText = 'Scanning the device...';
@@ -87,7 +91,8 @@
                                
         async function sendTextData2() { // This is test.
           let sample2 = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x2E, 0x0A, 0x0A, 0x0A]);
-          await printCharacteristic.writeValue(sample2)
+          await printCharacteristic.writeValue(sample2);
+          await printCharacteristic.writeValue(imgArray)
             .then(() => this.delayPromise(10))
             .catch(error => { 
                 console.log(error);
