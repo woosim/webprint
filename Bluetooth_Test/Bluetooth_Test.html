@@ -88,24 +88,24 @@
           return printData;
         }
             
-        async function sendNextImageDataBatch(resolve, reject) {
+        async function sendNextImageDataBatch() {
           // Can only write 512 bytes at a time to the characteristic
           // Need to send the image data in 512 byte batches
           if (index + 512 < data.length) {
             await printCharacteristic.writeValue(data.slice(index, index + 512)).then(() => {
               index += 512;
-              sendNextImageDataBatch(resolve, reject);
+              sendNextImageDataBatch();
             })
             .catch(error => console.log(error));
           } else {
             // Send the last bytes
             if (index < data.length) {
               await printCharacteristic.writeValue(data.slice(index, data.length)).then(() => {
-                resolve();
+                //resolve();
               })
               .catch(error => console.log(error));
             } else {
-              resolve();
+              //resolve();
             }
           }
         }
@@ -113,9 +113,7 @@
         function sendImageData() {
           index = 0;
           data = getImagePrintData();
-          return new Promise(function(resolve, reject) {
-            sendNextImageDataBatch(resolve, reject);
-          });
+          return sendNextImageDataBatch();
         }
         /* 2022.02.07 image test */
             
@@ -170,9 +168,8 @@
         }
             
         print.addEventListener('click', function() {
-            sendImageData();
             sendTextData2();
-            
+            sendImageData();
         });
                                
         async function sendTextData2() { // This is test.
