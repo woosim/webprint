@@ -15,19 +15,18 @@
    
     <body>
         <p align="center"><button id="scan" class="buttons">Scan Device</button></p>
-        <br/>
-        <p align="center"><button id="print" class="buttons">Print Sample</button></p>
-        <br/>
+        <p align="center"><button id="printtext" class="buttons">Print Text</button></p>
+        <p align="center"><button id="printlogo" class="buttons">Print Logo</button></p>
         <p align="center"><button id="disconnect" class="buttons">Disconnect Device</button></p>
-        <br/>
-        <br/><br/><br/><br/><p align="center" id="debug">Debug Text</p>
         
-        <p align="center"><image id="image" src="./img/coffee.png"></img>
+        <br/><br/><br/><br/><p align="center" id="debug">Debug Text</p>
+        <p align="center"><image id="image" src="./img/Logo1.png"></img>
         
         <script type="text/javascript" charset="utf-8">
           
         let connect = document.querySelector('#scan');
-        let print = document.querySelector('#print');
+        let printtext = document.querySelector('#printtext');
+        let printlogo = document.querySelector('#printlogo');
         let disconnect = document.querySelector('#disconnect');
         let debug = document.querySelector('#debug');
         let printCharacteristic = null;
@@ -37,7 +36,7 @@
         let test = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x2E]);
         let LF = new Uint8Array([0x0A, 0x0A, 0x0A]);
             
-        /* 2022.02.09 image test ~ */
+        /* 2022.02.09 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
         async function PrintImage() {
             var canvas = document.createElement("canvas");
             canvas.width = image.width;
@@ -62,9 +61,9 @@
                     debug.innerText = error;
                 });
         }
-        /* ~ 2022.02.09 image test */
+        /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2022.02.09 image test */
             
-        /* 2022.02.07 image test ~ */
+        /* 2022.02.07 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
         let imgArray = new ArrayBuffer();
         imgArray[0] = new Image();
         imgArray[0].src = '../img/woosim.bmp'
@@ -148,7 +147,7 @@
           data = getImagePrintData();
           return sendNextImageDataBatch();
         }
-        /* ~ 2022.02.07 image test */
+        /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2022.02.07 image test */
             
         connect.addEventListener('click', function() { // Scan Button Click
             debug.innerText = 'Scanning the device...';
@@ -191,7 +190,6 @@
         });
             
         async function sendTextData1() { // Woosim System
-          let woosim = new Uint8Array([0x57, 0x6F, 0x6F, 0x73, 0x69, 0x6D, 0x20, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6D]);
           await printCharacteristic.writeValue(woosim);
           await printCharacteristic.writeValue(LF)
             .then(() => this.delayPromise(100))
@@ -201,14 +199,14 @@
             });
         }
             
-        print.addEventListener('click', function() {
+        printtext.addEventListener('click', function() {
             sendTextData2();
-            //sendImageData();
+        });
+        printlogo.addEventListener('click', function() {
             PrintImage();
         });
                                
         async function sendTextData2() { // This is test.
-          let test = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x2E]);
           await printCharacteristic.writeValue(test);
           await printCharacteristic.writeValue(LF)
             .then(() => this.delayPromise(100))
@@ -216,7 +214,6 @@
                 console.log(error);
                 debug.innerText = error;
             });
-          //sendImageData();
         }
         
         function delayPromise(delay) {
