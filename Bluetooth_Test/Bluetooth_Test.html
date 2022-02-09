@@ -32,6 +32,7 @@
         let debug = document.querySelector('#debug');
         let printCharacteristic = null;
         let BluetoothDevice = null;
+        let LF = new Uint8Array([0x0A, 0x0A, 0x0A]);
             
         /* 2022.02.09 image test ~ */
         async function PrintImage() {
@@ -49,9 +50,8 @@
                 myBuffer.push(buffer[i]);
             }
             
-            let sample1 = new Uint8Array([0x0A, 0x0A, 0x0A]);
             await printCharacteristic.writeValue(myBuffer);
-            await printCharacteristic.writeValue(sample1)
+            await printCharacteristic.writeValue(LF)
                 .then(() => this.delayPromise(100))
                 .catch(error => { 
                     console.log(error);
@@ -187,8 +187,9 @@
         });
             
         async function sendTextData1() { // Woosim System
-          let sample1 = new Uint8Array([0x57, 0x6F, 0x6F, 0x73, 0x69, 0x6D, 0x20, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6D, 0x0A, 0x0A, 0x0A]);
-          await printCharacteristic.writeValue(sample1)
+          let woosim = new Uint8Array([0x57, 0x6F, 0x6F, 0x73, 0x69, 0x6D, 0x20, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6D]);
+          await printCharacteristic.writeValue(woosim);
+          await printCharacteristic.writeValue(LF)
             .then(() => this.delayPromise(100))
             .catch(error => { 
                 console.log(error);
@@ -203,9 +204,9 @@
         });
                                
         async function sendTextData2() { // This is test.
-          let sample2 = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x2E, 0x0A, 0x0A, 0x0A]);
-          //await printCharacteristic.writeValue(imgArray);
-          await printCharacteristic.writeValue(sample2)
+          let test = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x2E]);
+          await printCharacteristic.writeValue(test);
+          await printCharacteristic.writeValue(LF)
             .then(() => this.delayPromise(100))
             .catch(error => { 
                 console.log(error);
