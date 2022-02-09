@@ -42,7 +42,7 @@
             ctx.drawImage(image, 0, 0);
             var dataURL = canvas.toDataURL("image/png");
             
-            var myBuffer = [];
+            var myBuffer = new ArrayBuffer();
             var str = dataURL;
             var buffer = new ArrayBuffer(str);
             for (var i = 0; i < buffer.length; i++) {
