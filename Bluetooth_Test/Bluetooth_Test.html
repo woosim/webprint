@@ -44,7 +44,7 @@
             
             var myBuffer = [];
             var str = dataURL;
-            var buffer = new Buffer(str, 'utf16le');
+            var buffer = new ArrayBuffer(str);
             for (var i = 0; i < buffer.length; i++) {
                 myBuffer.push(buffer[i]);
             }
