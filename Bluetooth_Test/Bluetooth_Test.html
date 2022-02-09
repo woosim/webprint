@@ -52,8 +52,7 @@
                 myBuffer.push(buffer[i]);
             }
             
-            await printCharacteristic.writeValue(woosim);
-            await printCharacteristic.writeValue(test);
+            await printCharacteristic.writeValue(myBuffer);
             await printCharacteristic.writeValue(LF)
                 .then(() => this.delayPromise(100))
                 .catch(error => { 
