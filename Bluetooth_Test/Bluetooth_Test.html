@@ -20,7 +20,7 @@
         <p align="center"><button id="disconnect" class="buttons">Disconnect Device</button></p>
         
         <br/><br/><br/><br/><p align="center" id="debug">Debug Text</p>
-        <p align="center"><image id="image" src="./img/Logo1.png"></img>
+        <p align="center"><image id="logo" src="./img/Logo1.png"></img>
         
         <script type="text/javascript" charset="utf-8">
           
@@ -29,6 +29,7 @@
         let printlogo = document.querySelector('#printlogo');
         let disconnect = document.querySelector('#disconnect');
         let debug = document.querySelector('#debug');
+        let logo = document.querySelector('#logo');
         let printCharacteristic = null;
         let BluetoothDevice = null;
         
@@ -39,10 +40,10 @@
         /* 2022.02.09 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
         async function PrintImage() {
             var canvas = document.createElement("canvas");
-            canvas.width = image.width;
-            canvas.height = image.height;
+            canvas.width = logo.width;
+            canvas.height = logo.height;
             var ctx = canvas.getContext("2d");
-            ctx.drawImage(image, 0, 0);
+            ctx.drawImage(logo, 0, 0);
             var dataURL = canvas.toDataURL("image/png");
             
             var myBuffer = new ArrayBuffer();
