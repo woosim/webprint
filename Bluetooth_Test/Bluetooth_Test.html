@@ -22,7 +22,7 @@
         <br/>
         <br/><br/><br/><br/><p align="center" id="debug">Debug Text</p>
         
-        <p align="center"><image id="image" src="../img/woosim.bmp"></img>
+        <p align="center"><image id="image" src="./img/coffee.png"></img>
         
         <script type="text/javascript" charset="utf-8">
           
@@ -33,7 +33,34 @@
         let printCharacteristic = null;
         let BluetoothDevice = null;
             
-        /* 2022.02.07 image test */
+        /* 2022.02.09 image test ~ */
+        async function PrintImage(image) {
+            var canvas = document.createElement("canvas");
+            canvas.width = image.width;
+            canvas.height = image.height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(image, 0, 0);
+            var dataURL = canvas.toDataURL("image/png");
+            
+            var myBuffer = [];
+            var str = dataURL;
+            var buffer = new Buffer(str, 'utf16le');
+            for (var i = 0; i < buffer.length; i++) {
+                myBuffer.push(buffer[i]);
+            }
+            
+            let sample1 = new Uint8Array([0x0A, 0x0A, 0x0A]);
+            await printCharacteristic.writeValue(myBuffer);
+            await printCharacteristic.writeValue(sample1)
+                .then(() => this.delayPromise(100))
+                .catch(error => { 
+                    console.log(error);
+                    debug.innerText = error;
+                });
+        }
+        /* ~ 2022.02.09 image test */
+            
+        /* 2022.02.07 image test ~ */
         let imgArray = new ArrayBuffer();
         imgArray[0] = new Image();
         imgArray[0].src = '../img/woosim.bmp'
@@ -117,7 +144,7 @@
           data = getImagePrintData();
           return sendNextImageDataBatch();
         }
-        /* 2022.02.07 image test */
+        /* ~ 2022.02.07 image test */
             
         connect.addEventListener('click', function() { // Scan Button Click
             debug.innerText = 'Scanning the device...';
@@ -172,6 +199,7 @@
         print.addEventListener('click', function() {
             sendTextData2();
             //sendImageData();
+            PrintImage();
         });
                                
         async function sendTextData2() { // This is test.
@@ -183,7 +211,7 @@
                 console.log(error);
                 debug.innerText = error;
             });
-          sendImageData();
+          //sendImageData();
         }
         
         function delayPromise(delay) {
