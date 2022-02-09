@@ -16,7 +16,6 @@
     <body>
         <p align="center"><button id="scan" class="buttons">Scan Device</button></p>
         <p align="center"><button id="printtext" class="buttons">Print Text</button></p>
-        <input type="file" />
         <p align="center"><button id="printlogo" class="buttons">Print Logo</button></p>
         <p align="center"><button id="disconnect" class="buttons">Disconnect Device</button></p>
         
@@ -58,17 +57,10 @@
             imgArray[0] = new Image();
             imgArray[0].src = './img/Logo1.png'
             
-            const input = document.querySelector('input');
-            input.addEventListener('change', async function(e) {
-                const [file] = e.target.files;
-                const arrayBuffer = await file.arrayBuffer();
-                console.log('arrayBuffer', arrayBuffer);
-                // TODO: Let's decode arrayBuffer
-                const imageData = decode(arrayBuffer);
-                console.log('imageData', imageData);
-            });
+            let arrayBuffer = await logo.arrayBuffer();
+            let print = new Uint8Array(arrayBuffer);
             
-            await printCharacteristic.writeValue(imageData);
+            await printCharacteristic.writeValue(print);
             await printCharacteristic.writeValue(LF)
                 .then(() => this.delayPromise(100))
                 .catch(error => { 
