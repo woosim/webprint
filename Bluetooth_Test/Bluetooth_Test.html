@@ -50,7 +50,7 @@
             image.setAttribute('src', imageFile);
         }
         function convertImage(image) {
-            let canvas drawImageToCanvas(image);
+            let canvas = drawImageToCanvas(image);
             let ctx = canvas.getContext('2d');
             
             for(let y = 0; y < canvas.height; y ++) {
