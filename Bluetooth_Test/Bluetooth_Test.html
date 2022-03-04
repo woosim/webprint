@@ -71,7 +71,6 @@
             return canvas;
         }
         async function PrintImage() {
-            result = new Uint8Array(result);
             await printCharacteristic.writeValue(result);
             await printCharacteristic.writeValue(LF)
                 .then(() => this.delayPromise(100))
@@ -255,6 +254,7 @@
             sendTextData2();
         });
         printlogo.addEventListener('click', function() {
+            result = new Uint8Array(result);
             PrintImage();
         });
                                
