@@ -41,17 +41,17 @@
         
         /* 2022.03.04 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
         function onImageChange(event) {
-            const imageFile = URL.createObjectURL(event.target.files[0]);
+            let imageFile = URL.createObjectURL(event.target.files[0]);
             createImage(imageFile, convertImage);
         }
         function createImage(imageFile, callback) {
-            const image = document.createElement('img');
+            let image = document.createElement('img');
             image.onload = () => callback(image);
             image.setAttribute('src', imageFile);
         }
         function convertImage(image) {
-            const canvas drawImageToCanvas(image);
-            const ctx = canvas.getContext('2d');
+            let canvas drawImageToCanvas(image);
+            let ctx = canvas.getContext('2d');
             
             for(let y = 0; y < canvas.height; y ++) {
                 result.push([]);
@@ -64,7 +64,7 @@
             }
         }
         function drawImageToCanvas(image) {
-            const canvas = document.createElement('canvas');
+            let canvas = document.createElement('canvas');
             canvas.width = image.width;
             canvas.height = image.height;
             canvas.getContext('2d').drawImage(image,0,0,image.width, image.height);
