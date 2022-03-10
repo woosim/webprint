@@ -42,11 +42,12 @@
         document.querySelector('#file').addEventListener('change', function() {
             var reader = new FileReader();
             reader.onload = async function() {
-                let arrayBuffer = new Uint8Array(reader.result);
-                console.log(arrayBuffer);
-                await printCharacteristic.writeValue(arrayBuffer);
+                let image = new Uint8Array(reader.result);
+                console.log(image);
+                await printCharacteristic.writeValue(image);
                 await printCharacteristic.writeValue(LF);
             };
+            reader.readAsArrayBuffer(this.files[0]);
         });
         /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2022.03.10 image test */
             
