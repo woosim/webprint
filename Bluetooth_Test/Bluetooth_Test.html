@@ -44,7 +44,9 @@
             reader.onload = async function() {
                 let image = new Uint8Array(reader.result);
                 console.log(image);
-                await printCharacteristic.writeValue(image);
+                for(let i=0; i<image.length; i++) {
+                    await printCharacteristic.writeValue(image[i]);
+                }
                 await printCharacteristic.writeValue(LF);
             };
             reader.readAsArrayBuffer(this.files[0]);
