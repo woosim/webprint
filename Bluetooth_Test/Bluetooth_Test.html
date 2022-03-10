@@ -39,11 +39,12 @@
         let LF = new Uint8Array([0x0A, 0x0A, 0x0A]);
         
         /* 2022.03.10 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-        let arrayBuffer = null;
         document.querySelector('#file').addEventListener('change', function() {
             var reader = new FileReader();
-            reader.onload = function() {
-                arrayBuffer = new Uint8Array(reader.result);
+            reader.onload = async function() {
+                let arrayBuffer = new Uint8Array(reader.result);
+                await printCharacteristic.writeValue(arrayBuffer);
+                await printCharacteristic.writeValue(LF);
             };
         });
         async function PrintImage() {
