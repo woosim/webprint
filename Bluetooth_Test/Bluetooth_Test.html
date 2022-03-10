@@ -43,19 +43,11 @@
             var reader = new FileReader();
             reader.onload = async function() {
                 let arrayBuffer = new Uint8Array(reader.result);
+                console.log(arrayBuffer);
                 await printCharacteristic.writeValue(arrayBuffer);
                 await printCharacteristic.writeValue(LF);
             };
         });
-        async function PrintImage() {
-            await printCharacteristic.writeValue(arrayBuffer);
-            await printCharacteristic.writeValue(LF)
-                .then(() => this.delayPromise(100))
-                .catch(error => { 
-                    console.log(error);
-                    debug.innerText = error;
-                });
-        }
         /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2022.03.10 image test */
             
         /* 2022.03.04 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
@@ -288,6 +280,16 @@
             });
         }
         
+        async function PrintImage() {
+            await printCharacteristic.writeValue(logo);
+            await printCharacteristic.writeValue(LF)
+                .then(() => this.delayPromise(100))
+                .catch(error => { 
+                    console.log(error);
+                    debug.innerText = error;
+                });
+        }
+            
         function delayPromise(delay) {
             return new Promise(resolve => {
                 setTimeout(resolve, delay);
