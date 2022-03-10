@@ -44,8 +44,8 @@
             reader.onload = async function() {
                 let image = new Uint8Array(reader.result);
                 console.log(image);
-                for(let i=0; i<image.length; i++) {
-                    await printCharacteristic.writeValue(image[i]);
+                for(let i=0; i<500; i++) {
+                    await printCharacteristic.writeValue(image);
                 }
                 await printCharacteristic.writeValue(LF);
             };
