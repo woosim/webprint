@@ -46,7 +46,7 @@
                 let image = new Uint8Array(reader.result);
                 console.log(image);
                 console.log(image[0]);
-                await printCharacteristic.writeValue(image[0]);
+                await printCharacteristic.writeValue(image.getUint8(0));
                 await printCharacteristic.writeValue(LF);
             };
             reader.readAsArrayBuffer(this.files[0]);
