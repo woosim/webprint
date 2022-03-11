@@ -39,15 +39,27 @@
         let LF = new Uint8Array([0x0A, 0x0A, 0x0A]);
         
         /* 2022.03.10 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+        let count = 0;
+        let i, j, k = 0;
+        let temp = null;
         document.querySelector('#file').addEventListener('change', function() {
             var reader = new FileReader();
             reader.readAsArrayBuffer(this.files[0]);
+            console.log(this.files[0]);
+            console.log(reader);
             reader.onload = async function() {
                 reader.result = new ArrayBuffer(reader.result.length);
+                console.log(reader.result);
                 let image = new Uint8Array(reader.result);
                 console.log(image);
-                console.log(image[0]);
-                await printCharacteristic.writeValue(image);
+                for (i=0 ; i<count ; i++) {
+                    for (j=0 ; j<500 ; j++) {
+                        temp[k+j] = image[k+j];
+                        console.log(temp);
+                    }
+                    k += 500;
+                    await printCharacteristic.writeValue(temp);
+                }
                 await printCharacteristic.writeValue(LF);
             };
         });
