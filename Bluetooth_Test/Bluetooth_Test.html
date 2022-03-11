@@ -42,7 +42,6 @@
         let max=500;
         let count = 0;
         let i, j, k = 0;
-        let temp = null;
         document.querySelector('#file').addEventListener('change', function() {
             var reader = new FileReader();
             reader.readAsArrayBuffer(this.files[0]);
@@ -52,6 +51,7 @@
                 reader.result = new ArrayBuffer(reader.result.length);
                 console.log(reader.result);
                 let image = new Uint8Array(reader.result);
+                let temp = new ArrayBuffer(500);
                 console.log(image);
                 if (image.length > max) {
                     count = image.length/max;
