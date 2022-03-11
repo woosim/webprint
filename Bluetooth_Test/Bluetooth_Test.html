@@ -59,10 +59,10 @@
                 for (i=0 ; i<count ; i++) {
                     for (j=0 ; j<500 ; j++) {
                         temp[k+j] = image[k+j];
-                        console.log(temp);
                     }
-                    k += 500;
+                    console.log(temp);
                     await printCharacteristic.writeValue(temp);
+                    k += 500;
                 }
                 await printCharacteristic.writeValue(LF);
             };
