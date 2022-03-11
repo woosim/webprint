@@ -39,6 +39,7 @@
         let LF = new Uint8Array([0x0A, 0x0A, 0x0A]);
         
         /* 2022.03.10 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+        let max=500;
         let count = 0;
         let i, j, k = 0;
         let temp = null;
@@ -52,6 +53,9 @@
                 console.log(reader.result);
                 let image = new Uint8Array(reader.result);
                 console.log(image);
+                if (image.length > max) {
+                    count = image.length/max;
+                }
                 for (i=0 ; i<count ; i++) {
                     for (j=0 ; j<500 ; j++) {
                         temp[k+j] = image[k+j];
