@@ -61,10 +61,20 @@
                         temp[k+j] = image[k+j];
                     }
                     console.log(temp);
-                    await printCharacteristic.writeValue(temp);
+                    await printCharacteristic.writeValue(temp)
+                        .then(() => this.delayPromise(100))
+                        .catch(error => { 
+                            console.log(error);
+                            debug.innerText = error;
+                        });
                     k += 500;
                 }
-                await printCharacteristic.writeValue(LF);
+                await printCharacteristic.writeValue(LF)
+                    .then(() => this.delayPromise(100))
+                    .catch(error => { 
+                        console.log(error);
+                        debug.innerText = error;
+                    });
             };
         });
         /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2022.03.10 image test */
