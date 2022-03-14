@@ -46,7 +46,7 @@
             reader.readAsArrayBuffer(this.files[0]);
             console.log(this.files[0]);
             console.log(reader);
-            reader.result = new ArrayBuffer(reader.result.length);
+            reader.result = new ArrayBuffer(reader.length);
             console.log(reader.result);
             image = new Uint8Array(reader.result);
             console.log(image);
