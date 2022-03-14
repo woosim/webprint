@@ -51,6 +51,7 @@
                 let image = new Uint8Array(reader.result);
                 console.log(image);
             };
+            return image;
         });
         async function PrintImage() {
             if (index + 512 < image.length) {
