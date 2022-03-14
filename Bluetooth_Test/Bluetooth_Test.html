@@ -55,12 +55,15 @@
                 console.log(reader.result);
                 image = new Uint8Array(reader.result);
                 console.log(image);
+                console.log(image.length);
             }
         });
         async function PrintImage() {
             if (index + 512 < image.length) {
                 await printCharacteristic.writeValue(image.slice(index, index + 512))
                     .then(() => {
+                        console.log(image);
+                        console.log(image.length);
                         this.delayPromise(100);
                         index += 512;
                         PrintImage();
