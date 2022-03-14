@@ -40,18 +40,16 @@
         
         /* 2022.03.10 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
         let index=0;
+        let image;
         document.querySelector('#file').addEventListener('change', function() {
             var reader = new FileReader();
             reader.readAsArrayBuffer(this.files[0]);
             console.log(this.files[0]);
             console.log(reader);
-            reader.onload = async function() {
-                reader.result = new ArrayBuffer(reader.result.length);
-                console.log(reader.result);
-                let image = new Uint8Array(reader.result);
-                console.log(image);
-            };
-            return image;
+            reader.result = new ArrayBuffer(reader.result.length);
+            console.log(reader.result);
+            image = new Uint8Array(reader.result);
+            console.log(image);
         });
         async function PrintImage() {
             if (index + 512 < image.length) {
