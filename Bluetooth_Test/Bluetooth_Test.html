@@ -84,13 +84,13 @@
                             debug.innerText = error;
                         });
                 }
+                await printCharacteristic.writeValue(LF)
+                    .then(() => this.delayPromise(100))
+                    .catch(error => { 
+                        console.log(error);
+                        debug.innerText = error;
+                    });
             }
-            await printCharacteristic.writeValue(LF)
-            .then(() => this.delayPromise(100))
-            .catch(error => { 
-                console.log(error);
-                debug.innerText = error;
-            });
         }
         /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2022.03.10 image test */
             
