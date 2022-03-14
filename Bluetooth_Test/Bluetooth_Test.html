@@ -60,10 +60,11 @@
         });
         async function PrintImage() {
             if (index + 512 < image.length) {
-                await printCharacteristic.writeValue(image.slice(index, index + 512))
+                let temp = image.slice(index, index + 512);
+                console.log(temp);
+                console.log(temp.length);
+                await printCharacteristic.writeValue(temp)
                     .then(() => {
-                        console.log(image);
-                        console.log(image.length);
                         this.delayPromise(100);
                         index += 512;
                         PrintImage();
