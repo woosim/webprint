@@ -42,7 +42,7 @@
         let index = 0;
         let image;
         let w, h;
-        let bitimage = new Uint8Array([0x27, 0x88, 0x52, w, h]);
+        let bitimage;
             
         document.querySelector('#file').addEventListener('change', function(e) {
             let reader = new FileReader();
@@ -53,6 +53,7 @@
                 wh.onload = async function() {
                     w = this.width; console.log(w);
                     h = this.hight; console.log(h);
+                    bitimage = new Uint8Array([0x27, 0x88, 0x52, w, h]);
                 }
                 reader.result = new ArrayBuffer(reader.length);
                 image = new Uint8Array(reader.result);
