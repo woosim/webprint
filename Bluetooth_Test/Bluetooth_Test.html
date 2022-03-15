@@ -59,14 +59,14 @@
             }
         });
         async function PrintImage() {
-            if (index + 64 < image.length) {
-                let temp = image.slice(index, index + 64);
+            if (index + 32 < image.length) {
+                let temp = image.slice(index, index + 32);
                 console.log(temp);
                 console.log(temp.length);
                 await printCharacteristic.writeValue(temp)
                     .then(() => {
                         this.delayPromise(100);
-                        index += 64;
+                        index += 32;
                         PrintImage();
                     })
                     .catch(error => { 
