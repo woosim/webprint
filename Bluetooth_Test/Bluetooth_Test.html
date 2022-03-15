@@ -60,7 +60,7 @@
                 console.log(image.length);
                 console.log(bitimage);
             }
-        }
+        });
         async function PrintImage() {
             await printCharacteristic.writeValue(bitimage);
             if (index + 32 < image.length) {
