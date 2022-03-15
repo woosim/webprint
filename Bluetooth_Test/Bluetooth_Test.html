@@ -50,7 +50,7 @@
             reader.onload = function(e) {
                 let wh = new Image();
                 wh.src = e.target.result;
-                wh.onload = async function() {
+                wh.onload = function() {
                     w = this.width; console.log(w);
                     h = this.hight; console.log(h);
                     bitimage = new Uint8Array([0x27, 0x88, 0x52, w, h]);
