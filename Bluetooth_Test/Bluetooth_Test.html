@@ -38,6 +38,69 @@
         let test = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x2E]);
         let LF = new Uint8Array([0x0A, 0x0A, 0x0A]);
         
+        /* 2022.03.15 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+        let index = 0;
+        let image;
+        let w, h;
+        let bitimage = new Uint8Array([0x27, 0x88, 0x52, w, h]);
+            
+        document.querySelector('#file').addEventListener('change', async function(e) {
+            let reader = new FileReader();
+            reader.readAsArrayBuffer(e.target.files[0]);
+            reader.onload = async function(e) {
+                let wh = new Image();
+                wh.src = e.target.result;
+                wh.onload = async function() {
+                    w = this.width;
+                    h = this.hight;
+                }
+                reader.result = new ArrayBuffer(reader.length);
+                image = new Uint8Array(reader.result);
+                console.log(image);
+                console.log(image.length);
+                console.log(bitimage);
+            }
+        }
+        async function PrintImage() {
+            await printCharacteristic.writeValue(bitimage);
+            if (index + 32 < image.length) {
+                let temp = image.slice(index, index + 32);
+                console.log(temp);
+                console.log(temp.length);
+                await printCharacteristic.writeValue(temp)
+                    .then(() => {
+                        this.delayPromise(100);
+                        index += 32;
+                        PrintImage();
+                    })
+                    .catch(error => { 
+                        console.log(error);
+                        debug.innerText = error;
+                    });
+            } else {
+                if (index < image.length) {
+                    let temp = image.slice(index, image.length);
+                    console.log(temp);
+                    console.log(temp.length);
+                    await printCharacteristic.writeValue(temp)
+                        .then(() => {
+                            this.delayPromise(100);
+                        })
+                        .catch(error => { 
+                            console.log(error);
+                            debug.innerText = error;
+                        });
+                }
+                await printCharacteristic.writeValue(LF)
+                    .then(() => this.delayPromise(100))
+                    .catch(error => { 
+                        console.log(error);
+                        debug.innerText = error;
+                    });
+            }
+        }
+        /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2022.03.15 image test */
+            
         /* 2022.03.10 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
         let index=0;
         let image;
@@ -54,27 +117,6 @@
                 reader.result = new ArrayBuffer(reader.length);
                 console.log(reader.result);
                 image = new Uint8Array(reader.result);
-                image = new Uint8Array([0x1B, 0x58, 0x34,0x02, 0x14,
-                                        0x1E, 0x00,
-                                        0x21, 0x00,
-                                        0x40, 0x80,
-                                        0x40, 0x80, 
-                                        0x80, 0x40,
-                                        0x80, 0x40, 
-                                        0x80, 0x00, 
-                                        0x80, 0x00, 
-                                        0x40, 0x00, 
-                                        0x38, 0x00, 
-                                        0x07, 0x00, 
-                                        0x00, 0x80, 
-                                        0x00, 0x40, 
-                                        0x00, 0x40, 
-                                        0x80, 0x40, 
-                                        0x80, 0x40, 
-                                        0x40, 0x80, 
-                                        0x40, 0x80, 
-                                        0x21, 0x00, 
-                                        0x1E, 0x00]);
                 console.log(image);
                 console.log(image.length);
             }
