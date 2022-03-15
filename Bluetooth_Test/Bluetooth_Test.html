@@ -44,15 +44,15 @@
         let w, h;
         let bitimage = new Uint8Array([0x27, 0x88, 0x52, w, h]);
             
-        document.querySelector('#file').addEventListener('change', async function(e) {
+        document.querySelector('#file').addEventListener('change', function(e) {
             let reader = new FileReader();
             reader.readAsArrayBuffer(e.target.files[0]);
-            reader.onload = async function(e) {
+            reader.onload = function(e) {
                 let wh = new Image();
                 wh.src = e.target.result;
                 wh.onload = async function() {
-                    w = this.width;
-                    h = this.hight;
+                    w = this.width; console.log(w);
+                    h = this.hight; console.log(h);
                 }
                 reader.result = new ArrayBuffer(reader.length);
                 image = new Uint8Array(reader.result);
