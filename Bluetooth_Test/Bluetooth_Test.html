@@ -45,16 +45,16 @@
         let bitimage;
             
         document.querySelector('#file').addEventListener('change', function(e) {
-            let reader = new FileReader();
-            reader.readAsArrayBuffer(e.target.files[0]);
-            reader.onload = function(e) {
-                let wh = new Image();
+            let wh = new Image();
                 wh.src = e.target.result;
                 wh.onload = function() {
                     w = this.width; console.log(w);
                     h = this.hight; console.log(h);
                     bitimage = new Uint8Array([0x27, 0x88, 0x52, w, h]);
                 }
+            let reader = new FileReader();
+            reader.readAsArrayBuffer(e.target.files[0]);
+            reader.onload = function(e) {
                 reader.result = new ArrayBuffer(reader.length);
                 image = new Uint8Array(reader.result);
                 console.log(image);
