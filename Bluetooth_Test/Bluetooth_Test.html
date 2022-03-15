@@ -54,7 +54,7 @@
                 reader.result = new ArrayBuffer(reader.length);
                 console.log(reader.result);
                 image = new Uint8Array(reader.result);
-                image = new Uint8Array([0x1B, 0x58, 0x34,
+                image = new Uint8Array([0x1B, 0x58, 0x34,0x02, 0x14,
                                         0x1E, 0x00,
                                         0x21, 0x00,
                                         0x40, 0x80,
