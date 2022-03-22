@@ -38,32 +38,33 @@
         let test = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x2E]);
         let LF = new Uint8Array([0x0A, 0x0A, 0x0A]);
         
-        /* 2022.03.15 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        /* 2022.03.22 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
         let index = 0;
         let image;
-        let w, h;
-        let bitimage;
-            
+        let width, height;
+        
         document.querySelector('#file').addEventListener('change', function(e) {
-            let wh = new Image();
-                wh.src = e.target.result;
-                wh.onload = function() {
-                    w = this.width; console.log(w);
-                    h = this.hight; console.log(h);
-                    bitimage = new Uint8Array([0x27, 0x88, 0x52, w, h]);
-                }
-            let reader = new FileReader();
+            var reader = new FileReader();
             reader.readAsArrayBuffer(e.target.files[0]);
             reader.onload = function(e) {
+                image = new Image();
+                image.src = e.target.result;
+                image.onload = function() {
+                    width = this.width;
+                    height = this.height;
+                    console.log('width: '+width);
+                    console.log('height: '+height);
+                }
+                console.log(e.target.result);
+                console.log(reader);
                 reader.result = new ArrayBuffer(reader.length);
+                console.log(reader.result);
                 image = new Uint8Array(reader.result);
                 console.log(image);
                 console.log(image.length);
-                console.log(bitimage);
             }
         });
         async function PrintImage() {
-            await printCharacteristic.writeValue(bitimage);
             if (index + 32 < image.length) {
                 let temp = image.slice(index, index + 32);
                 console.log(temp);
@@ -100,9 +101,9 @@
                     });
             }
         }
-         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2022.03.15 image test */
+        /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2022.03.22 image test */
             
-        /* 2022.03.10 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+        /* 2022.03.10 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
         let index=0;
         let image;
         document.querySelector('#file').addEventListener('change', function(e) {
@@ -159,7 +160,7 @@
                     });
             }
         }
-        /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2022.03.10 image test */
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2022.03.10 image test */
             
         /* 2022.03.04 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
         function onImageChange(event) {
