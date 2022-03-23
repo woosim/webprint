@@ -39,6 +39,8 @@
         let LF = new Uint8Array([0x0A, 0x0A, 0x0A]);
         
         /* 2022.03.22 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+        let bitcommand1 = new Uint8Array([0x1b, 0x58, 0x33, 512, 64]);
+        let bitcommand2 = new Uint8Array([0x1b, 0x58, 0x32]);
         let index=0;
         let image;
         document.querySelector('#file').addEventListener('change', function(e) {
@@ -59,7 +61,8 @@
             }
         });
         async function PrintImage() {
-            if (index + 32 < image.length) {
+            await printCharacteristic.writeValue(bitcommand1);
+            while (index + 32 < image.length) {
                 let temp = image.slice(index, index + 32);
                 console.log(temp);
                 console.log(temp.length);
@@ -67,33 +70,33 @@
                     .then(() => {
                         this.delayPromise(100);
                         index += 32;
-                        PrintImage();
                     })
                     .catch(error => { 
                         console.log(error);
                         debug.innerText = error;
                     });
-            } else {
-                if (index < image.length) {
-                    let temp = image.slice(index, image.length);
-                    console.log(temp);
-                    console.log(temp.length);
-                    await printCharacteristic.writeValue(temp)
-                        .then(() => {
-                            this.delayPromise(100);
-                        })
-                        .catch(error => { 
-                            console.log(error);
-                            debug.innerText = error;
-                        });
-                }
-                await printCharacteristic.writeValue(LF)
-                    .then(() => this.delayPromise(100))
+            } 
+            
+            if (index < image.length) {
+                let temp = image.slice(index, image.length);
+                console.log(temp);
+                console.log(temp.length);
+                await printCharacteristic.writeValue(temp)
+                    .then(() => {
+                        this.delayPromise(100);
+                    })
                     .catch(error => { 
                         console.log(error);
                         debug.innerText = error;
                     });
+                await printCharacteristic.writeValue(bitcommand2);
             }
+            await printCharacteristic.writeValue(LF)
+                .then(() => this.delayPromise(100))
+                .catch(error => { 
+                    console.log(error);
+                    debug.innerText = error;
+                });
         }
         /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2022.03.22 image test */
             
