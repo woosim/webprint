@@ -39,55 +39,28 @@
         let LF = new Uint8Array([0x0A, 0x0A, 0x0A]);
         
         /* 2022.03.22 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-        let index = 0;
+        let index=0;
         let image;
-        let width, height;
-        let reader = new FileReader();
-            
         document.querySelector('#file').addEventListener('change', function(e) {
-            //reader.readAsArrayBuffer(e.target.files[0]);
-            reader.readAsDataURL(e.target.files[0]);
-            console.log(e.target.files[0]);
-            console.log(reader);
-            
+            let file = e.target.files;
+            console.log(file);
+            console.log(file[0]);
+            var reader = new FileReader();
+            reader.readAsArrayBuffer(e.target.files[0]);
             reader.onload = function(e) {
-                image = new Image();
-                image.src = e.target.result;
-                image.onload = function() {
-                    width = this.width;
-                    height = this.height;
-                    console.log('width: '+width);
-                    console.log('height: '+height);
-                }
-                
+                //console.log(e.target.files[0]);
                 console.log(e.target.result);
                 console.log(reader);
-                console.log(reader.length);
-                
                 reader.result = new ArrayBuffer(reader.length);
                 console.log(reader.result);
-                
                 image = new Uint8Array(reader.result);
                 console.log(image);
                 console.log(image.length);
-                
-                base64ToArrayBuffer(reader.result);
             }
         });
-        
-        let arraytemp;
-        function base64ToArrayBuffer(base64) {
-            let temp = window.atob(base64);
-            let len = temp.lenght;
-            arraytemp = new UintArray(len);
-            for (let i = 0; i < len; i++) {
-                arraytemp[i] = temp.charCodeAt(i);
-            }
-        }
-            
         async function PrintImage() {
-            if (index + 32 < arraytemp.length) {
-                let temp = arraytemp.slice(index, index + 32);
+            if (index + 32 < image.length) {
+                let temp = image.slice(index, index + 32);
                 console.log(temp);
                 console.log(temp.length);
                 await printCharacteristic.writeValue(temp)
@@ -101,8 +74,8 @@
                         debug.innerText = error;
                     });
             } else {
-                if (index < arraytemp.length) {
-                    let temp = arraytemp.slice(index, image.length);
+                if (index < image.length) {
+                    let temp = image.slice(index, image.length);
                     console.log(temp);
                     console.log(temp.length);
                     await printCharacteristic.writeValue(temp)
