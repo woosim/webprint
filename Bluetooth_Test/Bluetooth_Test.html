@@ -22,7 +22,6 @@
         
         <br/><br/><br/><br/><p align="center" id="debug">Debug Text</p>
         <!--<p align="center"><image id="logo" src="./img/Logo1.png"></img>-->
-        <img src="" id="id_img" style="display:none"/>
         
         <script type="text/javascript" charset="utf-8">
           
@@ -46,11 +45,12 @@
         let reader = new FileReader();
             
         document.querySelector('#file').addEventListener('change', function(e) {
+            //reader.readAsArrayBuffer(e.target.files[0]);
             reader.readAsDataURL(e.target.files[0]);
+            console.log(e.target.files[0]);
+            console.log(reader);
+            
             reader.onload = function(e) {
-                $img = $('#id_img').attr('src', e.target.result);
-                console.log($img.width());
-                console.log($img.height());
                 image = new Image();
                 image.src = e.target.result;
                 image.onload = function() {
@@ -59,22 +59,35 @@
                     console.log('width: '+width);
                     console.log('height: '+height);
                 }
+                
                 console.log(e.target.result);
                 console.log(reader);
-                reader.readAsArrayBuffer(reader);
+                console.log(reader.length);
+                
                 reader.result = new ArrayBuffer(reader.length);
                 console.log(reader.result);
+                
                 image = new Uint8Array(reader.result);
                 console.log(image);
                 console.log(image.length);
+                
+                base64ToArrayBuffer(reader.result);
             }
-            //reader.readAsArrayBuffer(e.target.files[0]);
-            console.log(reader);
         });
         
+        let arraytemp;
+        function base64ToArrayBuffer(base64) {
+            let temp = window.atob(base64);
+            let len = temp.lenght;
+            arraytemp = new UintArray(len);
+            for (let i = 0; i < len; i++) {
+                arraytemp[i] = temp.charCodeAt(i);
+            }
+        }
+            
         async function PrintImage() {
-            if (index + 32 < image.length) {
-                let temp = image.slice(index, index + 32);
+            if (index + 32 < arraytemp.length) {
+                let temp = arraytemp.slice(index, index + 32);
                 console.log(temp);
                 console.log(temp.length);
                 await printCharacteristic.writeValue(temp)
@@ -88,8 +101,8 @@
                         debug.innerText = error;
                     });
             } else {
-                if (index < image.length) {
-                    let temp = image.slice(index, image.length);
+                if (index < arraytemp.length) {
+                    let temp = arraytemp.slice(index, image.length);
                     console.log(temp);
                     console.log(temp.length);
                     await printCharacteristic.writeValue(temp)
