@@ -22,6 +22,7 @@
         
         <br/><br/><br/><br/><p align="center" id="debug">Debug Text</p>
         <!--<p align="center"><image id="logo" src="./img/Logo1.png"></img>-->
+        <img src="" id="id_img" style="display:none"/>
         
         <script type="text/javascript" charset="utf-8">
           
@@ -47,6 +48,9 @@
         document.querySelector('#file').addEventListener('change', function(e) {
             reader.readAsDataURL(e.target.files[0]);
             reader.onload = function(e) {
+                $img = $('#id_img').attr('src', e.target.result);
+                console.log($img.width());
+                console.log($img.height());
                 image = new Image();
                 image.src = e.target.result;
                 image.onload = function() {
@@ -57,7 +61,7 @@
                 }
                 console.log(e.target.result);
                 console.log(reader);
-                reader.readAsArrayBuffer(e.target.files[0]);
+                reader.readAsArrayBuffer(reader);
                 reader.result = new ArrayBuffer(reader.length);
                 console.log(reader.result);
                 image = new Uint8Array(reader.result);
