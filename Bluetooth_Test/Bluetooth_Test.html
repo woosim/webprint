@@ -42,10 +42,10 @@
         let index = 0;
         let image;
         let width, height;
-        
-        document.querySelector('#file').addEventListener('change', function(e) {
-            var reader = new FileReader();
+        let reader = new FileReader();
             
+        document.querySelector('#file').addEventListener('change', function(e) {
+            reader.readAsDataURL(e.target.files[0]);
             reader.onload = function(e) {
                 image = new Image();
                 image.src = e.target.result;
@@ -64,9 +64,11 @@
                 console.log(image.length);
             }
             //reader.readAsArrayBuffer(e.target.files[0]);
-            //reader.readAsDataURL(e.target.files[0]);
         });
+        
         async function PrintImage() {
+            reader.readAsArrayBuffer(reader);
+            console.log(reader);
             if (index + 32 < image.length) {
                 let temp = image.slice(index, index + 32);
                 console.log(temp);
