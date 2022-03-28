@@ -40,7 +40,7 @@
         
         /* 2022.03.22 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
         let bitcommand1 = new Uint8Array([0x1b, 0x58, 0x31, 512, 64]);
-        let bitcommand2 = new Uint8Array([0x1b, 0x58, 0x32]);
+        let bitcommand2 = new Uint8Array([0x1b, 0x58, 0x32, 64]);
         let index=0;
         let image;
         document.querySelector('#file').addEventListener('change', function(e) {
@@ -62,6 +62,7 @@
         });
         async function PrintImage() {
             await printCharacteristic.writeValue(bitcommand1);
+            console.log(bitcommand1);
             while (index + 32 < image.length) {
                 let temp = image.slice(index, index + 32);
                 console.log(temp);
@@ -90,6 +91,7 @@
                         debug.innerText = error;
                     });
                 await printCharacteristic.writeValue(bitcommand2);
+                console.log(bitcommand2);
             }
             await printCharacteristic.writeValue(LF)
                 .then(() => this.delayPromise(100))
