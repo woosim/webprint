@@ -37,14 +37,14 @@
         let woosim = new Uint8Array([0x57, 0x6F, 0x6F, 0x73, 0x69, 0x6D, 0x20, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6D]);
         let test = new Uint8Array([0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20, 0x74, 0x65, 0x73, 0x74, 0x2E]);
         let LF = new Uint8Array([0x0A, 0x0A, 0x0A]);
+        let FF = new Uint8Array([0x0C]);
         
         /* 2022.03.22 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
         let bitcommand1 = new Uint8Array([0x1B, 0x58, 0x34, 0x02, 0x14]);
-        let bitcommand2 = new Uint8Array([0x1E, 0x00, 0x21, 0x00, 0x40, 0x80, 0x40, 0x80, 0x80, 0x40
-                                          , 0x80, 0x40, 0x80, 0x00, 0x80, 0x00, 0x40, 0x00, 0x38, 0x00
-                                          , 0x07, 0x00, 0x00, 0x80, 0x00, 0x40, 0x00, 0x40, 0x80, 0x40
-                                          , 0x80, 0x40, 0x40, 0x80, 0x40, 0x80, 0x21, 0x00, 0x1, 0x00]);
-        let FF = new Uint8Array([0x0C]);
+        let bitcommand2 = new Uint8Array([0xFF, 0xFF, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81,
+                                          0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81,
+                                          0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81,
+                                          0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0xFF, 0xFF]);
         
         let image;
         document.querySelector('#file').addEventListener('change', function(e) {
@@ -70,12 +70,10 @@
             while (index + 16 < bitcommand2.length) {
                 let temp = bitcommand2.slice(index, index + 16);
                 console.log(temp);
-                console.log(temp.length);
                 await printCharacteristic.writeValue(temp)
                     .then(() => {
                         this.delayPromise(100);
                         index += 16;
-                        console.log(index);
                     })
                     .catch(error => { 
                         console.log(error);
@@ -86,7 +84,6 @@
             if (index < bitcommand2.length) {
                 let temp = bitcommand2.slice(index, bitcommand2.length);
                 console.log(temp);
-                console.log(temp.length);
                 await printCharacteristic.writeValue(temp)
                     .then(() => {
                         this.delayPromise(100);
@@ -96,14 +93,8 @@
                         debug.innerText = error;
                     });
                 await printCharacteristic.writeValue(FF);
-                console.log(FF);
             }
-            await printCharacteristic.writeValue(LF)
-                .then(() => this.delayPromise(100))
-                .catch(error => { 
-                    console.log(error);
-                    debug.innerText = error;
-                });
+            await printCharacteristic.writeValue(LF);
         }
         /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2022.03.22 image test */
             
