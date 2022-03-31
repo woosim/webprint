@@ -40,11 +40,11 @@
         let FF = new Uint8Array([0x0C]);
         
         /* 2022.03.22 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-        let bitcommand1 = new Uint8Array([0x1B, 0x58, 0x34, 0x02, 0x14]);
+        let bitcommand1 = new Uint8Array([0x1B, 0x58, 0x34, 0x02, 0x14]); // ESC X 4 x y d1 ~ dk Define user-defined bit-image
         let bitcommand2 = new Uint8Array([0xFF, 0xFF, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81,
                                           0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81,
                                           0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81,
-                                          0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0xFF, 0xFF]);
+                                          0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0xFF, 0xFF]); // Test용 네모 2개
         
         let image;
         document.querySelector('#file').addEventListener('change', function(e) {
@@ -54,7 +54,6 @@
             var reader = new FileReader();
             reader.readAsArrayBuffer(e.target.files[0]);
             reader.onload = function(e) {
-                //console.log(e.target.files[0]);
                 console.log(e.target.result);
                 console.log(reader);
                 reader.result = new ArrayBuffer(reader.length);
@@ -66,9 +65,9 @@
         });
         async function PrintImage() {
             let index=0;
-            await printCharacteristic.writeValue(bitcommand1);
-            while (index + 16 < bitcommand2.length) {
-                let temp = bitcommand2.slice(index, index + 16);
+            // await printCharacteristic.writeValue(bitcommand1); // Test
+            while (index + 16 < image.length) {
+                let temp = image.slice(index, index + 16);
                 console.log(temp);
                 await printCharacteristic.writeValue(temp)
                     .then(() => {
@@ -81,8 +80,8 @@
                     });
             } 
             console.log(index);
-            if (index < bitcommand2.length) {
-                let temp = bitcommand2.slice(index, bitcommand2.length);
+            if (index < image.length) {
+                let temp = image.slice(index, image.length);
                 console.log(temp);
                 await printCharacteristic.writeValue(temp)
                     .then(() => {
