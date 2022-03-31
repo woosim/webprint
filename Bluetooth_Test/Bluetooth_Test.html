@@ -39,8 +39,11 @@
         let LF = new Uint8Array([0x0A, 0x0A, 0x0A]);
         
         /* 2022.03.22 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-        let bitcommand1 = new Uint16Array([0x1B, 0x58, 0x34, 2, 20]);
-        let bitcommand2 = new Uint16Array([0x1B, 0x58, 0x32, 64]);
+        let bitcommand1 = new Uint16Array([0x1B, 0x58, 0x34, 0x02, 0x14]);
+        let bitcommand2 = new Uint16Array([0x1E, 0x00, 0x21, 0x00, 0x40, 0x80, 0x40, 0x80, 0x80, 0x40
+                                          , 0x80, 0x40, 0x80, 0x00, 0x80, 0x00, 0x40, 0x00, 0x38, 0x00
+                                          , 0x07, 0x00, 0x00, 0x80, 0x00, 0x40, 0x00, 0x40, 0x80, 0x40
+                                          , 0x80, 0x40, 0x40, 0x80, 0x40, 0x80, 0x21, 0x00, 0x21, 0x00]);
         let FF = new Uint8Array([0x0C]);
         let index=0;
         let image;
@@ -64,8 +67,8 @@
         async function PrintImage() {
             await printCharacteristic.writeValue(bitcommand1);
             console.log(bitcommand1);
-            while (index + 32 < image.length) {
-                let temp = image.slice(index, index + 32);
+            while (index + 32 < bitcommand2.length) {
+                let temp = bitcommand2.slice(index, index + 32);
                 console.log(temp);
                 console.log(temp.length);
                 await printCharacteristic.writeValue(temp)
@@ -79,8 +82,8 @@
                     });
             } 
             
-            if (index < image.length) {
-                let temp = image.slice(index, image.length);
+            if (index < bitcommand2.length) {
+                let temp = bitcommand2.slice(index, bitcommand2.length);
                 console.log(temp);
                 console.log(temp.length);
                 await printCharacteristic.writeValue(temp)
