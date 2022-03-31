@@ -43,9 +43,9 @@
         let bitcommand2 = new Uint8Array([0x1E, 0x00, 0x21, 0x00, 0x40, 0x80, 0x40, 0x80, 0x80, 0x40
                                           , 0x80, 0x40, 0x80, 0x00, 0x80, 0x00, 0x40, 0x00, 0x38, 0x00
                                           , 0x07, 0x00, 0x00, 0x80, 0x00, 0x40, 0x00, 0x40, 0x80, 0x40
-                                          , 0x80, 0x40, 0x40, 0x80, 0x40, 0x80, 0x21, 0x00, 0x21, 0x00]);
+                                          , 0x80, 0x40, 0x40, 0x80, 0x40, 0x80, 0x21, 0x00, 0x1, 0x00]);
         let FF = new Uint8Array([0x0C]);
-        let index=0;
+        
         let image;
         document.querySelector('#file').addEventListener('change', function(e) {
             let file = e.target.files;
@@ -65,9 +65,8 @@
             }
         });
         async function PrintImage() {
+            let index=0;
             await printCharacteristic.writeValue(bitcommand1);
-            console.log(bitcommand1);
-            console.log(bitcommand2);
             while (index + 16 < bitcommand2.length) {
                 let temp = bitcommand2.slice(index, index + 16);
                 console.log(temp);
