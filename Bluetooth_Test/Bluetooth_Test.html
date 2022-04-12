@@ -57,7 +57,7 @@
             let base64 = canvas.toDataURL('image/*');
             strImage = base64.replace(/^data:image\/[a-z]+;base64,/, "");
             console.log(strImage);
-            let decode = atob(strImage);
+            let decode = window.atob(strImage);
             console.log(decode);
             let n = decode.length;
             console.log(n);
