@@ -19,6 +19,7 @@
         <p align="center"><input id="file" type="file""/></p> <!--onchange="onImageChange(event)-->
         <p align="center"><button id="printimage" class="buttons">Print Image</button></p>
         <p align="center"><button id="disconnect" class="buttons">Disconnect Device</button></p>
+        <img align="center" id="logo" src="./img/woosim.bmp">
         
         <br/><br/><br/><br/><p align="center" id="debug">Debug Text</p>
         <!--<p align="center"><image id="logo" src="./img/Logo1.png"></img>-->
@@ -42,6 +43,11 @@
         let LF = new Uint8Array([0x0A, 0x0A, 0x0A]);
         let FF = new Uint8Array([0x0C]); // Print and return to standard mode in page mode. FF
         
+        /**/
+        console.log(logo);
+        console.log(logo.length);
+        /**/
+            
         /* 2022.04.11 image test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
         let bitcommand1 = new Uint8Array([0x1B, 0x58, 0x34, 0x02, 0x14]); // ESC X 4 x y d1 ~ dk // Define user-defined bit-image.
         let image;
