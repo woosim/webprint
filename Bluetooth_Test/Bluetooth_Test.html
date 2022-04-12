@@ -44,9 +44,9 @@
         let FF = new Uint8Array([0x0C]); // Print and return to standard mode in page mode. FF
         
         /*2022.04.12*/
+        let strImage;
         logo.addEventListener('load', function(e) {
             getDataUrl(e.currentTarget);
-            console.log(dataUrl);
         });
         function getDataUrl(img) {
             let canvas = document.createElement('canvas');
@@ -57,6 +57,16 @@
             let base64 = canvas.toDataURL('image/*');
             strImage = base64.replace(/^data:image\/[a-z]+;base64,/, "");
             console.log(strImage);
+            let decode = atob(strImage);
+            console.log(decode);
+            let n = decode.length;
+            console.log(n);
+            let u8arr = new Uint8Array(n);
+            console.log(u8arr);
+            while(n--){
+                u8arr[n] = decode.charCodeAt(n);
+            }
+            console.log(u8arr);
         }
         /*2022.04.12*/
             
